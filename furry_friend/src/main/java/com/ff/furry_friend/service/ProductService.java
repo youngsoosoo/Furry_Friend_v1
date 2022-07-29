@@ -17,10 +17,10 @@ public class ProductService {
         this.productRepository = productRepository;
     }
 
-    public List<product> findAll() {
-        return productRepository.findAll();
-    }
-    public Optional<product> findOne(Integer category) {
-        return productRepository.findByName(category);
-    }
+//    public List<product> findAll(Integer category) {
+//        return productRepository.findAllByCategory(category);
+//    }
+//    public Optional<product> findOne(Integer category) {
+//        return productRepository.findByName(category);
+//    }
 }
