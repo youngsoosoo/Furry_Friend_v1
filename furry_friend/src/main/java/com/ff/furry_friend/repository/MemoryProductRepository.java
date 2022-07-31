@@ -1,6 +1,5 @@
 package com.ff.furry_friend.repository;
 
-import com.ff.furry_friend.controller.MainController;
 import com.ff.furry_friend.entity.product;
 
 import javax.persistence.EntityManager;

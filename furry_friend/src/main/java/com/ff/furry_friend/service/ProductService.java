@@ -10,7 +10,9 @@ import java.util.List;
 import java.util.Optional;
 
 @Transactional
+@Service
 public class ProductService {
+    @Autowired
     private final ProductRepository productRepository;
 
     public ProductService(ProductRepository productRepository) {
