@@ -17,10 +17,12 @@ public class ProductService {
         this.productRepository = productRepository;
     }
 
-//    public List<product> findAll(Integer category) {
-//        return productRepository.findAllByCategory(category);
-//    }
-//    public Optional<product> findOne(Integer category) {
-//        return productRepository.findByName(category);
-//    }
+
+    public Optional<product> findCategory(Integer category) {
+        return productRepository.findByCategoty(category);
+    }
+
+    public List<product> findAll() {
+        return productRepository.findAll();
+    }
 }

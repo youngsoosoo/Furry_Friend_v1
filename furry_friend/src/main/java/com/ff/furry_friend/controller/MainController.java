@@ -3,24 +3,24 @@ package com.ff.furry_friend.controller;
 import com.ff.furry_friend.dto.productDTO;
 import com.ff.furry_friend.entity.product;
 import com.ff.furry_friend.repository.ProductRepository;
-import com.ff.furry_friend.service.ProductService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
-import java.util.ArrayList;
+import javax.persistence.EntityManager;
 import java.util.List;
-import java.util.Optional;
 
 @Controller
 public class MainController {
 
-    ProductService productService;
+
     ProductRepository productRepository;
+
+
 
     @GetMapping("category")
     public String category(Model model, productDTO dto){
-        List<product> li = productRepository.findAllByCategory(dto.toEntity().getCategory());
+        List<product> li = productRepository.findAll();
         System.out.println(li);
         model.addAttribute("li", li);
         return "category";
