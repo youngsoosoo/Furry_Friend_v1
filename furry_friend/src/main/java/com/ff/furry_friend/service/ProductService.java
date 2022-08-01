@@ -20,7 +20,7 @@ public class ProductService {
     }
 
 
-    public Optional<product> findCategory(Integer category) {
+    public List<product> findCategory(Integer category) {
         return productRepository.findByCategoty(category);
     }
 

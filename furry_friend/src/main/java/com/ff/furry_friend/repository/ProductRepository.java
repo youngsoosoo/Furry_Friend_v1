@@ -10,7 +10,7 @@ import java.util.Optional;
 
 @Repository
 public interface ProductRepository {
-    Optional<product> findByCategoty(Integer category);
+    List<product> findByCategoty(Integer category);
 
     List<product> findAll();
 }

@@ -6,8 +6,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.List;
+import java.util.Optional;
 
 @Controller
 public class MainController {
@@ -15,14 +17,20 @@ public class MainController {
     private ProductService productService;
 
     @GetMapping("category")
-    public String category(Model model){
-        List<product> li = productService.findAll();
-        model.addAttribute("li", li);
+    public String category(@RequestParam(value = "category", required = false) int category, Model model){
+        if(category == 0){//카테고리 값이 없다면 실행 x 수정 필요
+            List<product> li = productService.findAll();
+            model.addAttribute("li", li);
+        }else{
+            List<product> li = productService.findCategory(category);
+            model.addAttribute("li", li);
+        }
+
         return "category";
     }
 
     @GetMapping("category/pet")
-    public String pet(){
-        return "pet";
+    public String pet(Model model){
+        return "category";
     }
 }

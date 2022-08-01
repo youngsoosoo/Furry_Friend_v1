@@ -26,9 +26,9 @@ class ProductServiceTest {
         product pro = new product();
         pro.setCategory(24);
         //when
-        Optional<product> category = productService.findCategory(pro.getCategory());
+        List<product> category = productService.findCategory(pro.getCategory());
         //Then
-        product find = productRepository.findByCategoty(category.get().getCategory()).get();
+        product find = productRepository.findByCategoty(category.get(0).getCategory()).get(0);
         assertEquals(pro.getCategory(), find.getCategory());
     }
 
