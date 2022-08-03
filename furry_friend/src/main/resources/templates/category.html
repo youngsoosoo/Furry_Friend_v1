@@ -3,75 +3,26 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width">
+    <title>카테고리</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-gH2yIJqKdNHPEq0n4Mqa/HGKIhSkIHeL5AyhkYV8i59U5AR6csBvApHHNl/vI1Bx" crossorigin="anonymous">
-    <title>Insert title here</title>
 </head>
 <body>
-
-<nav class="navbar navbar-expand-lg bg-light">
-    <div class="container-fluid">
-        <a class="navbar-brand" href="#">Navbar</a>
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                        강아지
-                    </a>
-                    <ul class="dropdown-menu">
-                        <li><a class="dropdown-item" href="/category?category=13">집</a></li>
-                        <li><a class="dropdown-item" href="/category?category=12">옷</a></li>
-                        <li><a class="dropdown-item" href="/category?category=11">먹이</a></li>
-                        <li><a class="dropdown-item" href="/category?category=15">간식</a></li>
-                        <li><a class="dropdown-item" href="/category?category=14">장난감</a></li>
-                        <li><a class="dropdown-item" href="/category?category=16">배변패드</a></li>
-
-                        <li><hr class="dropdown-divider"></li>
-                        <li><a class="dropdown-item" href="/category?category=17">애견용품</a></li>
-                    </ul>
-                </li>
-                <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                        고양이
-                    </a>
-                    <ul class="dropdown-menu">
-                        <li><a class="dropdown-item" href="/category?category=22">옷</a></li>
-                        <li><a class="dropdown-item" href="/category?category=21">먹이</a></li>
-                        <li><a class="dropdown-item" href="/category?category=25">간식</a></li>
-                        <li><a class="dropdown-item" href="/category?category=26">모래</a></li>
-                        <li><a class="dropdown-item" href="/category?category=24">장난감</a></li>
-                        <li><a class="dropdown-item" href="/category?category=23">캣타워</a></li>
-                        <li><hr class="dropdown-divider"></li>
-                        <li><a class="dropdown-item" href="/category?category=27">애냥용품</a></li>
-                    </ul>
-                </li>
-            </ul>
-            <form class="d-flex" role="search">
-                <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-                <button class="btn btn-outline-success" type="submit">Search</button>
-            </form>
-        </div>
-    </div>
-</nav>
-
+<header th:replace="fragments/header.html::headerFragment"></header>
 
 <div class="container text-center" >
     <div class="row">
         <div class="col" th:each="item : ${li}">
-            <a th:href="@{/category/detail?name=${item.getPro_name()}}">
-                <div class="card" style="width: 18rem;">
-                    <img th:src="@{${item.getPro_image()}}" class="card-img-top" alt="..." src="">
+            <div class="card" style="width: 18rem;">
+                <a href="/category/detail?name=" th:attrappend="href=${item.getPro_name()}">
+                    <img th:src="@{${item.getPro_image()}}" class="card-img-top" alt="...">
                     <div class="card-body">
                         <h5 class="card-title" th:text="${item.getPro_name()}"></h5>
                     </div>
-                </div>
-            </a>
+                </a>
+            </div>
         </div>
     </div>
 </div>
-
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-A3rJD856KowSb7dwlZdYEkO39Gagi7vIsF0jrRAoQmDKKtQBHUuLZ9AsSv4jD4Xa" crossorigin="anonymous"></script>
 </body>
 </html>

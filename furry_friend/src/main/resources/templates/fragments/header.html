@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lagn="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width">
+    <title>Insert title here</title>
+</head>
+
+<!--footerFragment 선언-->
+<div th:fragment="headerFragment">
+    <nav class="navbar navbar-expand-lg bg-light">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="/all">모두보기</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            강아지
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="/category?category=13">집</a></li>
+                            <li><a class="dropdown-item" href="/category?category=12">옷</a></li>
+                            <li><a class="dropdown-item" href="/category?category=11">먹이</a></li>
+                            <li><a class="dropdown-item" href="/category?category=15">간식</a></li>
+                            <li><a class="dropdown-item" href="/category?category=14">장난감</a></li>
+                            <li><a class="dropdown-item" href="/category?category=16">배변패드</a></li>
+
+                            <li><hr class="dropdown-divider"></li>
+                            <li><a class="dropdown-item" href="/category?category=17">애견용품</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            고양이
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="/category?category=22">옷</a></li>
+                            <li><a class="dropdown-item" href="/category?category=21">먹이</a></li>
+                            <li><a class="dropdown-item" href="/category?category=25">간식</a></li>
+                            <li><a class="dropdown-item" href="/category?category=26">모래</a></li>
+                            <li><a class="dropdown-item" href="/category?category=24">장난감</a></li>
+                            <li><a class="dropdown-item" href="/category?category=23">캣타워</a></li>
+                            <li><hr class="dropdown-divider"></li>
+                            <li><a class="dropdown-item" href="/category?category=27">애냥용품</a></li>
+                        </ul>
+                    </li>
+                </ul>
+                <form class="d-flex" role="search">
+                    <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+                    <button class="btn btn-outline-success" type="submit">Search</button>
+                </form>
+            </div>
+        </div>
+    </nav>
+</div>
+</html>

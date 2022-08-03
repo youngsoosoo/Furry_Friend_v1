@@ -13,19 +13,19 @@ import javax.persistence.*;
 @NoArgsConstructor  //기본 생성자
 public class product {
     @Id
-    private String pro_name;
+    private String pro_name;    //이름
     @Column
-    private Integer category;
+    private Integer category;   //카테고리 번호
     @Column
-    private String pro_number;
+    private String pro_number;  //번호
     @Column
-    private String pro_image;
+    private String pro_image;   //사진
     @Column
-    private String pro_explain;
+    private String pro_explain; //설명
     @Column
-    private Integer pro_price;
+    private Integer pro_price;  //가격
     @Column
-    private String pro_option;
+    private String pro_option;  // 사이즈나 그런 거?? 잘 모르겠삼..
     @Column
-    private Integer pro_view;
+    private Integer pro_view;   //조회수
 }
