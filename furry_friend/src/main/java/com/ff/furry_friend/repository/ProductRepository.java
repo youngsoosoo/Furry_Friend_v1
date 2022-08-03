@@ -11,6 +11,6 @@ import java.util.Optional;
 @Repository
 public interface ProductRepository {
     List<product> findByCategoty(Integer category);
-
+    List<product> findByName(String name);
     List<product> findAll();
 }

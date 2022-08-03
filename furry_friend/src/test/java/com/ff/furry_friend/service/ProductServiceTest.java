@@ -43,4 +43,16 @@ class ProductServiceTest {
         List<product> find = productRepository.findAll();
         assertEquals(pro.getPro_name(), find.get(0).getPro_name());
     }
+
+    @Test
+    void findName() {
+        //given
+        product pro = new product();
+        pro.setPro_name("고양이 장난감");
+        //when
+        List<product> name = productService.findName(pro.getPro_name());
+        //Then
+        product find = productRepository.findByName(name.get(0).getPro_name()).get(0);
+        assertEquals(pro.getPro_name(), find.getPro_name());
+    }
 }

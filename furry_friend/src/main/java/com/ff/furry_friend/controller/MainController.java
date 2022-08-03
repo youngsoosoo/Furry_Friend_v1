@@ -29,8 +29,10 @@ public class MainController {
         return "category";
     }
 
-    @GetMapping("category/pet")
-    public String pet(Model model){
-        return "category";
+    @GetMapping("category/detail")
+    public String pet(@RequestParam(value = "name") String name, Model model){
+        List<product> li = productService.findName(name);
+        model.addAttribute("li", li);
+        return "detail";
     }
 }
