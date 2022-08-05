@@ -24,7 +24,7 @@ class ProductServiceTest {
     void findCategory() {
         //given
         product pro = new product();
-        pro.setCategory(24);
+        pro.category(24);
         //when
         List<product> category = productService.findCategory(pro.getCategory());
         //Then
@@ -36,7 +36,7 @@ class ProductServiceTest {
     void findAll() {
         //given
         product pro = new product();
-        pro.setPro_name("고양이 장난감");
+        pro.name("고양이 장난감");
         //when
         List<product> category = productService.findAll();
         //Then
@@ -48,7 +48,7 @@ class ProductServiceTest {
     void findName() {
         //given
         product pro = new product();
-        pro.setPro_name("고양이 장난감");
+        pro.name("고양이 장난감");
         //when
         List<product> name = productService.findName(pro.getPro_name());
         //Then

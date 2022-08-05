@@ -42,4 +42,16 @@ public class MainController {
         model.addAttribute("li", li);
         return "detail";
     }
+
+    @GetMapping("purchase")
+    public String Purchase(@RequestParam(value = "name") String name){  //구매
+        System.out.println(name);
+        return null;
+    }
+
+    @GetMapping("basket")
+    public String Shopping_basket(@RequestParam(value = "name") String name){   //장바구니
+        System.out.println(name);
+        return null;
+    }
 }
