@@ -1,11 +1,14 @@
 package com.ff.furry_friend.controller;
 
+import com.ff.furry_friend.dto.basketForm;
+import com.ff.furry_friend.entity.basket;
 import com.ff.furry_friend.entity.product;
 import com.ff.furry_friend.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.List;
@@ -49,9 +52,11 @@ public class MainController {
         return null;
     }
 
-    @GetMapping("basket")
-    public String Shopping_basket(@RequestParam(value = "name") String name){   //장바구니
-        System.out.println(name);
-        return null;
+    @PostMapping("basket")
+    public void Shopping_basket(basketForm form){   //장바구니
+        System.out.println(form);
+        basket ba = new basket();
+        ba.setPro_name(form.getPro_name());
+        productService.shopping(ba);
     }
 }

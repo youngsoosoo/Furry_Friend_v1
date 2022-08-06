@@ -1,5 +1,6 @@
 package com.ff.furry_friend.service;
 
+import com.ff.furry_friend.entity.basket;
 import com.ff.furry_friend.entity.product;
 import com.ff.furry_friend.repository.ProductRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,5 +31,9 @@ public class ProductService {
 
     public List<product> findAll() {
         return productRepository.findAll();
+    }
+
+    public basket shopping(basket basket){
+        return productRepository.shopping(basket);
     }
 }
