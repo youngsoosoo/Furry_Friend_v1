@@ -1,6 +1,5 @@
 package com.ff.furry_friend.repository;
 
-import com.ff.furry_friend.entity.basket;
 import com.ff.furry_friend.entity.product;
 
 import javax.persistence.EntityManager;
@@ -36,8 +35,5 @@ public class MemoryProductRepository implements ProductRepository {
         return em.createQuery("select p from product p", product.class).getResultList();
     }
 
-    @Override
-    public basket shopping(basket basket){
-        return null;    //수정 필요
-    }
+
 }

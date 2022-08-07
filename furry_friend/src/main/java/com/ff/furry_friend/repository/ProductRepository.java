@@ -15,5 +15,5 @@ public interface ProductRepository {
     List<product> findByName(String name);
     List<product> findAll();
 
-    basket shopping(basket basket);
+
 }

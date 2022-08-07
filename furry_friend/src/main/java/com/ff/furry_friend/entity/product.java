@@ -32,7 +32,7 @@ public class product {
     @Column
     private Integer pro_price;  //가격
     @Column
-    private String pro_option;  // 사이즈나 그런 거?? 잘 모르겠삼..
+    private String pro_option;  // 사이즈나 옵션등
     @Column
     private Integer pro_view;   //조회수
 

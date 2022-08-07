@@ -33,7 +33,5 @@ public class ProductService {
         return productRepository.findAll();
     }
 
-    public basket shopping(basket basket){
-        return productRepository.shopping(basket);
-    }
+
 }
