@@ -9,6 +9,7 @@ import java.util.Optional;
 public class MemoryBasketRepository implements BasketRepository{
 
     private final EntityManager em;
+    private static long sequence = 0L;
 
     public MemoryBasketRepository(EntityManager em) {
         this.em = em;
@@ -16,13 +17,14 @@ public class MemoryBasketRepository implements BasketRepository{
 
     @Override
     public basket shopping(basket basket){
+        basket.setBasket_id(sequence++);
         em.persist(basket);
         return basket;
     }
 
     @Override
     public Optional<basket> findByName(String name){
-        List<basket> result = em.createQuery("select b from basket b where b.pro_name = :name", basket.class)
+        List<basket> result = em.createQuery("select b from basket b where b.proName = :name", basket.class)
                 .setParameter("name", name)
                 .getResultList();
         return result.stream().findAny();

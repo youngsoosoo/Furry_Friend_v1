@@ -5,7 +5,10 @@ import lombok.*;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import java.sql.Time;
+import java.util.ArrayList;
+import java.util.List;
 
 @AllArgsConstructor
 @ToString
@@ -15,6 +18,7 @@ import java.sql.Time;
 @NoArgsConstructor  //기본 생성자
 public class user {
     @Id
+    @Setter
     private String id;
     @Column
     private String pw;
@@ -30,4 +34,7 @@ public class user {
     private String coupon;
     @Column
     private Time create_time;
+
+    @OneToMany(mappedBy = "user")
+    private List<basket> basketList = new ArrayList<>();
 }

@@ -2,10 +2,7 @@ package com.ff.furry_friend.entity;
 
 import lombok.*;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
+import javax.persistence.*;
 
 @AllArgsConstructor
 @ToString
@@ -16,11 +13,16 @@ import javax.persistence.JoinColumn;
 @NoArgsConstructor  //기본 생성자
 public class basket {
 
-    @JoinColumn //수정 필요 외래키 설정
-    private String id;
     @Id
-    private String pro_name;
-
+    private Long basket_id;
     @Column
     private Integer amount;
+
+    @ManyToOne(fetch = FetchType.LAZY) // 1
+    @JoinColumn(name = "id") // 2
+    private user userId;
+
+    @ManyToOne(fetch = FetchType.LAZY) // 1
+    @JoinColumn(name = "pro_name") // 2
+    private product proName;
 }

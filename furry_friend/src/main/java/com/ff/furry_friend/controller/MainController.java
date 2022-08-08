@@ -59,7 +59,7 @@ public class MainController {
     public void Shopping_basket(basketForm form){   //장바구니
         System.out.println(form);
         basket ba = new basket();
-        ba.setPro_name(form.getPro_name());
+        ba.setProName(ba.getProName());
         basketService.shopping(ba);
     }
 }
