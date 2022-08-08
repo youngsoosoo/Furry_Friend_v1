@@ -1,10 +1,10 @@
 package com.ff.furry_friend.repository;
 
 import com.ff.furry_friend.entity.basket;
-import com.ff.furry_friend.entity.product;
 
 import javax.persistence.EntityManager;
 import java.util.List;
+import java.util.Optional;
 
 public class MemoryBasketRepository implements BasketRepository{
 
@@ -21,10 +21,10 @@ public class MemoryBasketRepository implements BasketRepository{
     }
 
     @Override
-    public List<product> findByName(String name){
-        List<product> result =  em.createQuery("select p from product p where p.pro_name = :pro_name", product.class)
-                .setParameter("pro_name", name)
+    public Optional<basket> findByName(String name){
+        List<basket> result = em.createQuery("select b from basket b where b.pro_name = :name", basket.class)
+                .setParameter("name", name)
                 .getResultList();
-        return result;
+        return result.stream().findAny();
     }
 }

@@ -12,16 +12,11 @@ import javax.persistence.*;
 @NoArgsConstructor  //기본 생성자
 public class product {
     @Id
+    @Setter
     private String pro_name;    //이름
-    public void name(String pro_name) {
-        this.pro_name = pro_name;
-    }
     @Column
+    @Setter
     private Integer category;   //카테고리 번호
-
-    public void category(Integer category) {
-        this.category = category;
-    }
 
     @Column
     private String pro_number;  //번호

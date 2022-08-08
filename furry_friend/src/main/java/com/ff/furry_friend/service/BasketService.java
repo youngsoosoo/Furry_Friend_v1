@@ -17,15 +17,16 @@ public class BasketService {
         this.basketRepository = basketRepository;
     }
 
-    public basket shopping(basket basket){
+    public String shopping(basket basket){
         validateDuplicate(basket);
-        return basketRepository.shopping(basket);
+        basketRepository.shopping(basket);
+        return basket.getPro_name();
     }
 
-    private void validateDuplicate(basket ba) {
+    private void validateDuplicate(basket ba) { //중복 상품 검증
         basketRepository.findByName(ba.getPro_name())
                 .ifPresent(m -> {
                     throw new IllegalStateException("이미 존재하는 상품입니다.");
-                }); //optional로 바꿔보기
+                });
     }
 }
