@@ -5,10 +5,7 @@ import lombok.*;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
 import java.sql.Time;
-import java.util.ArrayList;
-import java.util.List;
 
 @AllArgsConstructor
 @ToString
@@ -35,6 +32,4 @@ public class user {
     @Column
     private Time create_time;
 
-    @OneToMany(mappedBy = "user")
-    private List<basket> basketList = new ArrayList<>();
 }

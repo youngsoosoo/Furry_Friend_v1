@@ -28,14 +28,14 @@ public class BasketServiceTest {
         user user = new user();
         user.setId("root");
         ba.setBasket_id(0L);
-        ba.setProName(pro);
-        ba.setUserId(user);
+        ba.setProduct(pro);
+        ba.setUser(user);
         ba.setAmount(1);
         //When
         String name = basketService.shopping(ba);
         //Then
         basket find = basketRepository.findByName(name).get();
-        assertEquals(ba.getProName().getPro_name(), find.getProName().getPro_name());
+        assertEquals(ba.getProduct().getPro_name(), find.getProduct().getPro_name());
     }
 
     @Test
@@ -55,8 +55,8 @@ public class BasketServiceTest {
 
         for (int i = 1; i <= 2; i++) {
             ba = basket.builder()
-                    .proName(pro)
-                    .userId(user)
+                    .product(pro)
+                    .user(user)
                     .build();
 
             basketList.add(ba);
@@ -66,7 +66,7 @@ public class BasketServiceTest {
         basket savedbasket = basketRepository.shopping(ba);
 
         //then
-        assertEquals(username, savedbasket.getProName());
-        assertEquals(username, savedbasket.getUserId());
+        assertEquals(username, savedbasket.getProduct());
+        assertEquals(username, savedbasket.getUser());
     }
 }

@@ -15,14 +15,15 @@ public class basket {
 
     @Id
     private Long basket_id;
+
     @Column
     private Integer amount;
 
     @ManyToOne(fetch = FetchType.LAZY) // 1
-    @JoinColumn(name = "id") // 2
-    private user userId;
+    @JoinColumn(name = "user_id") // 2
+    private user user;
 
     @ManyToOne(fetch = FetchType.LAZY) // 1
-    @JoinColumn(name = "pro_name") // 2
-    private product proName;
+    @JoinColumn(name = "product_id") // 2
+    private product product;
 }
