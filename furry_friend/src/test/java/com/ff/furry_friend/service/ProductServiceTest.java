@@ -23,7 +23,7 @@ class ProductServiceTest {
     void findCategory() {
         //given
         product pro = new product();
-        pro.category(24);
+        pro.setCategory(24);
         //when
         List<product> category = productService.findCategory(pro.getCategory());
         //Then
@@ -35,7 +35,7 @@ class ProductServiceTest {
     void findAll() throws Exception{
         //given
         product pro = new product();
-        pro.name("고양이 장난감");
+        pro.setPro_name("고양이 장난감");
         //when
         List<product> category = productService.findAll();
         //Then
@@ -47,7 +47,7 @@ class ProductServiceTest {
     void findName() throws Exception{
         //given
         product pro = new product();
-        pro.name("고양이 장난감");
+        pro.setPro_name("고양이 장난감");
         //when
         List<product> name = productService.findName(pro.getPro_name());
         //Then

@@ -24,7 +24,7 @@ public class MemoryBasketRepository implements BasketRepository{
 
     @Override
     public Optional<basket> findByName(String name){
-        List<basket> result = em.createQuery("select b from basket b where b.proName = :name", basket.class)
+        List<basket> result = em.createQuery("select b from basket b where b.product.pro_name = :name", basket.class)
                 .setParameter("name", name)
                 .getResultList();
         return result.stream().findAny();

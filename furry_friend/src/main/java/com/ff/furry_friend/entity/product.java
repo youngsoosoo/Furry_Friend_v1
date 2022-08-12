@@ -3,6 +3,8 @@ package com.ff.furry_friend.entity;
 import lombok.*;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @AllArgsConstructor
 @ToString
@@ -31,5 +33,7 @@ public class product {
     @Column
     private Integer pro_view;   //조회수
 
-
+    @Builder.Default
+    @OneToMany(mappedBy = "product")
+    private List<basket> basket = new ArrayList<>();
 }

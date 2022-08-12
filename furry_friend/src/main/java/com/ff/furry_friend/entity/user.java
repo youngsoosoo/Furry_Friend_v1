@@ -2,10 +2,10 @@ package com.ff.furry_friend.entity;
 
 import lombok.*;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.sql.Time;
+import java.util.ArrayList;
+import java.util.List;
 
 @AllArgsConstructor
 @ToString
@@ -32,4 +32,7 @@ public class user {
     @Column
     private Time create_time;
 
+    @Builder.Default
+    @OneToMany(mappedBy = "user")
+    private List<basket> basket = new ArrayList<>();
 }

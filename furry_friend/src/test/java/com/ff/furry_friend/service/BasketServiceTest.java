@@ -27,6 +27,7 @@ public class BasketServiceTest {
         product pro = new product();
         user user = new user();
         user.setId("root");
+        pro.setPro_name("고양이 장난감");
         ba.setBasket_id(0L);
         ba.setProduct(pro);
         ba.setUser(user);

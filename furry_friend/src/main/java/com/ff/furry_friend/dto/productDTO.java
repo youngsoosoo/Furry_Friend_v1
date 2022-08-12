@@ -17,8 +17,4 @@ public class productDTO {
     private Integer pro_price;
     private String pro_option;
     private Integer pro_view;
-
-    public product toEntity(){
-        return new product(pro_name, category, pro_number, pro_image, pro_explain, pro_price, pro_option, pro_view);
-    }
 }

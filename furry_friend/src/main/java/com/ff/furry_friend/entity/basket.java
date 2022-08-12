@@ -3,6 +3,8 @@ package com.ff.furry_friend.entity;
 import lombok.*;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @AllArgsConstructor
 @ToString
@@ -19,11 +21,11 @@ public class basket {
     @Column
     private Integer amount;
 
-    @ManyToOne(fetch = FetchType.LAZY) // 1
-    @JoinColumn(name = "user_id") // 2
+    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL) // 1
+    @JoinColumn(name = "user_id") // 외래키 이름
     private user user;
 
-    @ManyToOne(fetch = FetchType.LAZY) // 1
-    @JoinColumn(name = "product_id") // 2
+    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL) // 1
+    @JoinColumn(name = "pro_name") // 2
     private product product;
 }
