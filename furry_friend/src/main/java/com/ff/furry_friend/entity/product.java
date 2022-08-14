@@ -14,12 +14,13 @@ import java.util.List;
 @NoArgsConstructor  //기본 생성자
 public class product {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long pro_id;
     @Setter
     private String pro_name;    //이름
     @Column
     @Setter
     private Integer category;   //카테고리 번호
-
     @Column
     private String pro_number;  //번호
     @Column

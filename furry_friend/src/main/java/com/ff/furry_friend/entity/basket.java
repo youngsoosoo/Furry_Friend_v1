@@ -16,16 +16,17 @@ import java.util.List;
 public class basket {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long basket_id;
 
     @Column
     private Integer amount;
 
-    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL) // 1
+    @ManyToOne(fetch = FetchType.LAZY) // 1
     @JoinColumn(name = "user_id") // 외래키 이름
     private user user;
 
-    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL) // 1
-    @JoinColumn(name = "pro_name") // 2
+    @ManyToOne(fetch = FetchType.LAZY) // 1
+    @JoinColumn(name = "pro_id") // 2
     private product product;
 }
