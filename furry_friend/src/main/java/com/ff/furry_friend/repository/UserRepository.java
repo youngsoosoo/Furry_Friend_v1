@@ -8,10 +8,12 @@ import java.util.Optional;
 
 @Repository
 public interface UserRepository {
+
     user save(user user);
+
+    Optional<user> findByCreate_Id(Long id);
 
     Optional<user> findById(String id);
 
-    Optional<user> findByName(String name);
     List<user> findAll();
 }

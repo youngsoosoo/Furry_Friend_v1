@@ -10,6 +10,7 @@ import java.sql.Time;
 @ToString
 @Getter
 public class UserForm {
+
     private String id;
     private String pw;
     private String address;

@@ -2,6 +2,7 @@ package com.ff.furry_friend.service;
 
 import com.ff.furry_friend.entity.product;
 import com.ff.furry_friend.repository.ProductRepository;
+import com.ff.furry_friend.repository.service.ProductService;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;

@@ -1,17 +1,19 @@
 spring:
-    datasource:
-        url: jdbc:mysql://localhost:3306/furryfriend?serverTimeZone=Asia/Seoul
-        username: root
-        password: inhatc
-        driver-class-name: com.mysql.cj.jdbc.Driver
-    thymeleaf:
-        cache: false
-        prefix: classpath:templates/
-        suffix: .html
+  datasource:
+      url: jdbc:mysql://127.0.0.1:3306/furry
+      username: root
+      password: inhatc
+      driver-class-name: com.mysql.cj.jdbc.Driver
 
-    jpa:
-        show-sql: true
-        open-in-view: true
+  jpa:
+    database:
+    hibernate:
+      ddl-auto: create
+    properties:
+      hibernate:
+        #show_sql: true
+        format_sql: true
 
-    main:
-        allow-bean-definition-overriding: true
+#logging.level:
+#  org.hibernate.SQL: debug
+  #org.hibernate.type: trace
