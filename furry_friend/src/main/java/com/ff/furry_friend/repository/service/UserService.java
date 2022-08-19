@@ -25,11 +25,10 @@ public class UserService {
     /**
      * 회원가입
      */
-    public Long create(user user) {
+    public int create(user user) {
+        System.out.println(user);
         validateDuplicateMember(user); //중복 회원 검증
         userRepository.save(user);
-        System.out.println(user.getId());
-        System.out.println(user.getCreate_id());
         return user.getCreate_id();
     }
 

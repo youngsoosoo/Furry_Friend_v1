@@ -17,34 +17,24 @@ public class user {
 
     @Id
     @GeneratedValue
-    private Long create_id;
-
+    private int create_id;
     @Column(nullable = false)
     private String id;
-
-//    @Column(nullable = false)
+    @Column(nullable = false)
     private String pw;
-
+    @Column(nullable = false)
     private String address;
-
+    @Column(nullable = false)
     private String name;
-
+    @Column(nullable = false)
     private String phone;
-
-    @Column
+    @Column(nullable = false)
     private int save_money;
-
-//    @Column(nullable = false)
+    @Column(nullable = false)
     private String create_time;
 
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
     private List<basket> users = new ArrayList<>();
-
-
-    //?
-//    @Builder.Default
-//    @OneToMany(fetch = FetchType.LAZY, mappedBy = "user", cascade = CascadeType.ALL)
-//    private List<basket> basket = new ArrayList<>();
 
 
 }

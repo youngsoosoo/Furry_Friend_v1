@@ -1,8 +1,10 @@
 package com.ff.furry_friend.repository;
 
 import com.ff.furry_friend.entity.user;
+import org.hibernate.Transaction;
 
 import javax.persistence.EntityManager;
+import javax.persistence.EntityTransaction;
 
 import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
@@ -16,7 +18,7 @@ public class MemoryUserRepository implements UserRepository {
         this.em = em;
     }
 
-    private static long sequence = 0L;
+    private static int sequence = 0;
     Timestamp timestamp = new Timestamp(System.currentTimeMillis());
     SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
 
@@ -24,9 +26,7 @@ public class MemoryUserRepository implements UserRepository {
     public user save(user user) {
         user.setCreate_id(sequence++);
         user.setCreate_time(sdf.format(timestamp));
-        em.merge(user);
-        System.out.println(user);
-        //em.persist(user); // 저장합니다 동작
+        em.persist(user);
         return user;
     }
 
