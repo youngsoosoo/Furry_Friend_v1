@@ -16,6 +16,7 @@ import java.util.List;
 public class product {
 
     @Id
+    @Setter
     @GeneratedValue
     private Long pro_id;
 

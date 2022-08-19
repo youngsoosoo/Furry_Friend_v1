@@ -2,7 +2,6 @@ package com.ff.furry_friend.repository.service;
 
 import com.ff.furry_friend.dto.UserForm;
 import com.ff.furry_friend.entity.user;
-import com.ff.furry_friend.repository.MemoryUserRepository;
 import com.ff.furry_friend.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -29,18 +28,32 @@ public class UserService {
     public Long create(user user) {
         validateDuplicateMember(user); //중복 회원 검증
         userRepository.save(user);
+        System.out.println(user.getId());
+        System.out.println(user.getCreate_id());
         return user.getCreate_id();
     }
 
-    public int Login(UserForm form) {
+    public boolean Login(UserForm form) {
         Optional<user> result = userRepository.findById(form.getId());
         if (!result.get().getId().equals(form.getId())) {
-            return 0;
+            return false;
         }
         if (!result.get().getPw().equals(form.getPw())) {
-            return 0;
+            return false;
         }
-        return 1;
+        return true;
+    }
+
+    public String findById(UserForm form){
+        Optional<user> result = userRepository.findById(form.getId());
+
+        return result.get().getId();
+    }
+
+    public String findByPw(UserForm form){
+        Optional<user> result = userRepository.findById(form.getId());
+
+        return result.get().getPw();
     }
 
     private void validateDuplicateMember(user user) {

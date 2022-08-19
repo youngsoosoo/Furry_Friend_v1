@@ -1,14 +1,14 @@
 package com.ff.furry_friend.dto;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.ToString;
+import lombok.*;
 
 import java.sql.Time;
 
 @AllArgsConstructor
 @ToString
 @Getter
+@Setter
+@NoArgsConstructor
 public class UserForm {
 
     private String id;

@@ -18,7 +18,7 @@ public class MemoryBasketRepository implements BasketRepository{
     @Override
     public basket shopping(basket basket){
         basket.setBasket_id(sequence++);
-        em.persist(basket);
+        em.merge(basket);
         return basket;
     }
 

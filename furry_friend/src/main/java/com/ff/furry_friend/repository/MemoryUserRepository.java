@@ -24,7 +24,9 @@ public class MemoryUserRepository implements UserRepository {
     public user save(user user) {
         user.setCreate_id(sequence++);
         user.setCreate_time(sdf.format(timestamp));
-        em.persist(user); // 저장합니다 동작
+        em.merge(user);
+        System.out.println(user);
+        //em.persist(user); // 저장합니다 동작
         return user;
     }
 

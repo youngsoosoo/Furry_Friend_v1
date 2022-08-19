@@ -46,9 +46,9 @@ public class UserController {
 
     @PostMapping(value = "/user/login")
     public String Login(UserForm form, HttpSession session) {
-        int login = userService.Login(form);
+        boolean login = userService.Login(form);
 
-        if(login == 0) {
+        if(!login) {
             return "/user/login";
         } else{
             System.out.println("로그인 성공");
