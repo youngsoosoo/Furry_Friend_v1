@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<th:if test="${userId ne null}">
+    <h1>로그인 성공입니다</h1>
+    <input type="button" value="로그아웃" onclick="location.href='/logout'">
+</th:if>
+</body>
+</html>

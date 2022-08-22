@@ -14,6 +14,14 @@
         </div>
         <button type="submit">로그인</button>
     </form>
+    <th:if test="${userId eq null}">
+        <a href="https://kauth.kakao.com/oauth/authorize
+            ?client_id=b5f85af25d1bdf961d4f2016bafe3c6e
+            &redirect_uri=http://localhost:8000/login
+            &response_type=code">
+            <img src="/templates/img/kakao_login_medium_wide.png">
+        </a>
+    </th:if>
 </div> <!-- /container -->
 </body>
 </html>
