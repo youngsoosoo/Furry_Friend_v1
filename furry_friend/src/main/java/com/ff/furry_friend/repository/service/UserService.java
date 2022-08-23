@@ -76,7 +76,7 @@ public class UserService {
         return userRepository.findAll();
     }
 
-    public Optional<user> findOne(Long id) {
+    public Optional<user> findOne(int id) {
         return userRepository.findByCreate_Id(id);
     }
 }

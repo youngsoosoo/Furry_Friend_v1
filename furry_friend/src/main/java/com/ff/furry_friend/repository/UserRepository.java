@@ -11,7 +11,7 @@ public interface UserRepository {
 
     user save(user user);
 
-    Optional<user> findByCreate_Id(Long id);
+    Optional<user> findByCreate_Id(int id);
 
     Optional<user> findById(String id);
 

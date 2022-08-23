@@ -6,9 +6,11 @@ import com.ff.furry_friend.repository.service.KakaoLoginService;
 import com.ff.furry_friend.repository.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpSession;
+import java.io.IOException;
 import java.util.HashMap;
 
 @Controller
@@ -42,7 +44,7 @@ public class UserController {
         return "user/login";
     }
 
-    @GetMapping("/user/loign")
+    @GetMapping("/user/login")
     public String Login(){
         return "user/login";
     }
@@ -60,21 +62,18 @@ public class UserController {
         }
     }
 
-    @ResponseBody
+
     @GetMapping("/user/kakao")
-    public void  kakaoCallback(@RequestParam String code, HttpSession session) {
+    public String getCI(@RequestParam String code, Model model) throws IOException {
+        System.out.println("code = " + code);
+        String access_token = kakaoLoginService.getKakaoAccessToken(code);
+        HashMap<String, Object> userInfo = kakaoLoginService.getUserInfo(access_token);
+        model.addAttribute("code", code);
+        model.addAttribute("access_token", access_token);
+        model.addAttribute("userInfo", userInfo);
 
-        String access_Token = kakaoLoginService.getKakaoAccessToken(code);
-        System.out.println("controller access_token : " + access_Token);
-
-        HashMap<String, Object> userInfo = kakaoLoginService.getUserInfo(access_Token);
-        System.out.println("login Controller : " + userInfo);
-
-        //    클라이언트의 이메일이 존재할 때 세션에 해당 이메일과 토큰 등록
-        if (userInfo.get("email") != null) {
-            session.setAttribute("userId", userInfo.get("email"));
-            session.setAttribute("access_Token", access_Token);
-        }
+        //ci는 비즈니스 전환후 검수신청 -> 허락받아야 수집 가능
+        return "user/login";
     }
 
     @RequestMapping(value="/logout")

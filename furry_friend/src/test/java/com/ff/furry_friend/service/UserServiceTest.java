@@ -35,7 +35,7 @@ public class UserServiceTest {
         user.setId("spring");
 
         //When
-        Long saveId = userService.create(user);
+        int saveId = userService.create(user);
 
         //Then
         if(userService.findOne(saveId).isPresent()){

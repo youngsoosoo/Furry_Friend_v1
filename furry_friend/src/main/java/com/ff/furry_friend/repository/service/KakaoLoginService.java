@@ -8,6 +8,8 @@ import com.google.gson.JsonElement;
 
 import java.io.*;
 import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
+import java.net.ProtocolException;
 import java.net.URL;
 import java.util.HashMap;
 
@@ -33,6 +35,7 @@ public class KakaoLoginService {
             sb.append("&client_id=8a03e9ddcf15f3e1a7a1da99b7963cf4"); // TODO REST_API_KEY 입력
             sb.append("&redirect_uri=http://localhost:8080/user/kakao"); // TODO 인가코드 받은 redirect_uri 입력
             sb.append("&code=" + code);
+
             bw.write(sb.toString());
             bw.flush();
 
@@ -98,12 +101,15 @@ public class KakaoLoginService {
             JsonParser parser = new JsonParser();
             JsonElement element = parser.parse(result);
 
+            JsonObject obj = (JsonObject) parser.parse(result);
             JsonObject properties = element.getAsJsonObject().get("properties").getAsJsonObject();
             JsonObject kakao_account = element.getAsJsonObject().get("kakao_account").getAsJsonObject();
 
+            String id = obj.get("id").toString();
             String nickname = properties.getAsJsonObject().get("nickname").getAsString();
             String email = kakao_account.getAsJsonObject().get("email").getAsString();
 
+            userInfo.put("id", id);
             userInfo.put("nickname", nickname);
             userInfo.put("email", email);
 
@@ -113,6 +119,39 @@ public class KakaoLoginService {
         }
 
         return userInfo;
+    }
+
+    public String getAgreementInfo(String access_token)
+    {
+        String result = "";
+        String host = "https://kapi.kakao.com/v2/user/scopes";
+        try{
+            URL url = new URL(host);
+            HttpURLConnection urlConnection = (HttpURLConnection)url.openConnection();
+            urlConnection.setRequestMethod("GET");
+            urlConnection.setRequestProperty("Authorization", "Bearer "+access_token);
+
+            BufferedReader br = new BufferedReader(new InputStreamReader(urlConnection.getInputStream()));
+            String line = "";
+            while((line=br.readLine())!=null)
+            {
+                result+=line;
+            }
+
+            int responseCode = urlConnection.getResponseCode();
+            System.out.println("responseCode = " + responseCode);
+
+            // result is json format
+            br.close();
+
+        } catch (MalformedURLException e) {
+            e.printStackTrace();
+        } catch (ProtocolException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return result;
     }
 
     public void kakaoLogout(String access_Token) {

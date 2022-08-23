@@ -31,7 +31,7 @@ public class MemoryUserRepository implements UserRepository {
     }
 
     @Override
-    public Optional<user> findByCreate_Id(Long id) {
+    public Optional<user> findByCreate_Id(int id) {
         user user = em.find(user.class, id);
         return Optional.ofNullable(user);
     }
