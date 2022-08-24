@@ -15,15 +15,12 @@
             </div>
             <button type="submit">로그인</button>
         </form>
-        <a href="https://kauth.kakao.com/oauth/authorize
-            ?client_id=8a03e9ddcf15f3e1a7a1da99b7963cf4
-            &redirect_uri=http://localhost:8080/user/kakao
-            &response_type=code">
+        <a href="https://kauth.kakao.com/oauth/authorize?client_id=8a03e9ddcf15f3e1a7a1da99b7963cf4&redirect_uri=http://localhost:8080/user/kakao&response_type=code">
             <img src="/static/img/kakao_login_medium_wide.png" alt="카카오로그인">
         </a>
     </span>
     <span th:if="${id!=null}">
-        <form name="logout" action="http://localhost:8080/logout">
+        <form name="logout" action="/logout">
             <input type="button" value="로그아웃" onclick="location.href='/logout'">
         </form>
     </span>

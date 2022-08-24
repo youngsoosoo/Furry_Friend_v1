@@ -12,12 +12,16 @@ import org.springframework.web.bind.annotation.*;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.util.HashMap;
+import java.util.Map;
 
 @Controller
 public class UserController {
 
     private final UserService userService;
     private final KakaoLoginService kakaoLoginService;
+
+    @Autowired
+    KakaoAPI kakaoAPI;
 
     @Autowired
     public UserController(UserService userService, KakaoLoginService kakaoLoginService) {
@@ -66,14 +70,14 @@ public class UserController {
     @GetMapping("/user/kakao")
     public String getCI(@RequestParam String code, Model model) throws IOException {
         System.out.println("code = " + code);
-        String access_token = kakaoLoginService.getKakaoAccessToken(code);
-        HashMap<String, Object> userInfo = kakaoLoginService.getUserInfo(access_token);
+        String access_token = kakaoAPI.getToken(code);
+        Map<String, Object> userInfo = kakaoAPI.getUserInfo(access_token);
         model.addAttribute("code", code);
         model.addAttribute("access_token", access_token);
         model.addAttribute("userInfo", userInfo);
 
         //ci는 비즈니스 전환후 검수신청 -> 허락받아야 수집 가능
-        return "user/login";
+        return "index";
     }
 
     @RequestMapping(value="/logout")
@@ -81,6 +85,6 @@ public class UserController {
         kakaoLoginService.kakaoLogout((String)session.getAttribute("access_Token"));
         session.removeAttribute("access_Token");
         session.removeAttribute("userId");
-        return "index";
+        return "user/login";
     }
 }
