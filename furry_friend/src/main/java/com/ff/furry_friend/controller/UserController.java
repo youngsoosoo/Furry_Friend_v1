@@ -2,7 +2,7 @@ package com.ff.furry_friend.controller;
 
 import com.ff.furry_friend.dto.UserForm;
 import com.ff.furry_friend.entity.user;
-import com.ff.furry_friend.repository.service.KakaoLoginService;
+import com.ff.furry_friend.repository.service.KakaoAPI;
 import com.ff.furry_friend.repository.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -11,22 +11,20 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
-import java.util.HashMap;
 import java.util.Map;
 
 @Controller
 public class UserController {
-
+    @Autowired
     private final UserService userService;
-    private final KakaoLoginService kakaoLoginService;
 
     @Autowired
-    KakaoAPI kakaoAPI;
+    private final KakaoAPI kakaoAPI;
 
     @Autowired
-    public UserController(UserService userService, KakaoLoginService kakaoLoginService) {
+    public UserController(UserService userService, KakaoAPI kakaoAPI) {
         this.userService = userService;
-        this.kakaoLoginService = kakaoLoginService;
+        this.kakaoAPI = kakaoAPI;
     }
 
     @GetMapping("/user/create")
@@ -75,16 +73,17 @@ public class UserController {
         model.addAttribute("code", code);
         model.addAttribute("access_token", access_token);
         model.addAttribute("userInfo", userInfo);
+        System.out.println(userInfo.get("id").toString() + userInfo.get("nickname").toString() + userInfo.get("email").toString());
 
         //ci는 비즈니스 전환후 검수신청 -> 허락받아야 수집 가능
-        return "index";
+        return "user/logininformation";
     }
 
-    @RequestMapping(value="/logout")
-    public String logout(HttpSession session) {
-        kakaoLoginService.kakaoLogout((String)session.getAttribute("access_Token"));
-        session.removeAttribute("access_Token");
-        session.removeAttribute("userId");
-        return "user/login";
-    }
+//    @RequestMapping(value="/logout")
+//    public String logout(HttpSession session) {
+//        kakaoLoginService.kakaoLogout((String)session.getAttribute("access_Token"));
+//        session.removeAttribute("access_Token");
+//        session.removeAttribute("userId");
+//        return "user/login";
+//    }
 }

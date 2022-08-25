@@ -17,9 +17,16 @@ import java.util.List;
 @Controller
 public class MainController {
     @Autowired
-    private ProductService productService;
+    private final ProductService productService;
+
     @Autowired
-    private BasketService basketService;
+    private final BasketService basketService;
+
+    @Autowired
+    public MainController(ProductService productService, BasketService basketService) {
+        this.productService = productService;
+        this.basketService = basketService;
+    }
 
     @GetMapping("all")
     public String category(Model model){

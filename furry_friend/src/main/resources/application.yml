@@ -13,11 +13,3 @@ spring:
       hibernate:
         #show_sql: true
         format_sql: true
-
-  thymeleaf:
-    check-template-location: true
-    cache: false
-
-  #logging.level:
-#  org.hibernate.SQL: debug
-  #org.hibernate.type: trace
