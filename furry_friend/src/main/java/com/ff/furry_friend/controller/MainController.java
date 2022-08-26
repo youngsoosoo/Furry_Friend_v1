@@ -5,6 +5,7 @@ import com.ff.furry_friend.entity.basket;
 import com.ff.furry_friend.entity.product;
 import com.ff.furry_friend.repository.service.BasketService;
 import com.ff.furry_friend.repository.service.ProductService;
+import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -15,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import java.util.List;
 
 @Controller
+@AllArgsConstructor
 public class MainController {
     @Autowired
     private final ProductService productService;
@@ -22,11 +24,6 @@ public class MainController {
     @Autowired
     private final BasketService basketService;
 
-    @Autowired
-    public MainController(ProductService productService, BasketService basketService) {
-        this.productService = productService;
-        this.basketService = basketService;
-    }
 
     @GetMapping("all")
     public String category(Model model){

@@ -55,7 +55,7 @@ public class UserService {
         return result.get().getPw();
     }
 
-    private void validateDuplicateMember(user user) {
+    public void validateDuplicateMember(user user) {
         userRepository.findById(user.getId())
                 .ifPresent(m -> {
                     throw new IllegalStateException("이미 존재하는 회원 아이디입니다.");
@@ -79,4 +79,10 @@ public class UserService {
     public Optional<user> findOne(int id) {
         return userRepository.findByCreate_Id(id);
     }
+
+    public int nameCheck(String id) {
+        System.out.println(userRepository.findid(id));
+        return userRepository.findid(id);
+    }
+
 }

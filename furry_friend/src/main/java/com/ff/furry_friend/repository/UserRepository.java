@@ -16,4 +16,6 @@ public interface UserRepository {
     Optional<user> findById(String id);
 
     List<user> findAll();
+
+    int findid(String id);
 }

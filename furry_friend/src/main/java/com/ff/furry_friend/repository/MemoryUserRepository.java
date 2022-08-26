@@ -50,4 +50,17 @@ public class MemoryUserRepository implements UserRepository {
         return result.stream().findAny();
     }
 
+    @Override
+    public int findid(String id){
+        List<user> result = em.createQuery("select m from user m where m.id = :id", user.class)
+                .setParameter("id", id)
+                .getResultList();
+
+        if(result.size() != 0){
+            if(result.get(0).getId().equals(id)){
+                return 1;
+            }
+        }
+        return 0;
+    }
 }

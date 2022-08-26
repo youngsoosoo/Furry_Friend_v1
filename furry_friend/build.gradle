@@ -29,7 +29,12 @@ dependencies {
 	//카카오아이디
 	implementation 'com.google.code.gson:gson:2.8.7'
 	implementation group: 'org.json', name: 'json', version: '20090211'
+	//Ajax
+	implementation group: 'com.fasterxml.jackson.core', name: 'jackson-databind', version: '2.12.3'
+	implementation group: 'com.fasterxml.jackson.core', name: 'jackson-core', version: '2.12.3'
+	implementation group: 'com.fasterxml.jackson.core', name: 'jackson-annotations', version: '2.12.3'
 
+	//휴대폰 인증
 	compileOnly group: 'net.nurigo', name: 'javaSDK', version: '2.2'
 
 	compileOnly 'org.projectlombok:lombok'

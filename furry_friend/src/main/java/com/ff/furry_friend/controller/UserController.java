@@ -4,7 +4,9 @@ import com.ff.furry_friend.dto.UserForm;
 import com.ff.furry_friend.entity.user;
 import com.ff.furry_friend.repository.service.CertifiedService;
 import com.ff.furry_friend.repository.service.KakaoAPI;
+import com.ff.furry_friend.repository.service.TestService;
 import com.ff.furry_friend.repository.service.UserService;
+import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -13,9 +15,9 @@ import org.springframework.web.bind.annotation.*;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.util.Map;
-import java.util.Random;
 
 @Controller
+@AllArgsConstructor
 public class UserController {
     @Autowired
     private final UserService userService;
@@ -27,16 +29,13 @@ public class UserController {
     private final CertifiedService certifiedService;
 
     @Autowired
-    public UserController(UserService userService, KakaoAPI kakaoAPI, CertifiedService certifiedService) {
-        this.userService = userService;
-        this.kakaoAPI = kakaoAPI;
-        this.certifiedService = certifiedService;
-    }
+    private final TestService testService;
 
     @GetMapping("/user/create")
     public String Create(){
         return "user/create";
     }
+
 
     @PostMapping(value = "/user/create")
     public String create(UserForm form) {
@@ -85,6 +84,15 @@ public class UserController {
         return "user/logininformation";
     }
 
+    //ajax
+
+    @PostMapping("/idCheck")
+    @ResponseBody
+    public int idCheck(@RequestParam("id") String id) {
+        return userService.nameCheck(id);
+    }
+
+
     @RequestMapping(value = "/phoneCheck", method = RequestMethod.GET)
     @ResponseBody
     public String sendSMS(@RequestParam("phone") String userPhoneNumber) { // 휴대폰 문자보내기
@@ -97,7 +105,7 @@ public class UserController {
 
     @GetMapping("/test")
     public String test(){
-        return "test";
+        return "testpage";
     }
 
 //    @RequestMapping(value="/logout")

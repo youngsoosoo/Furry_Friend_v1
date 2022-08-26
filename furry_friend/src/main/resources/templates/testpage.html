@@ -1,10 +1,21 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
 </head>
 <body>
+<tr>
+  <th>
+    <label for="id">아&emsp;이&emsp;디</label>
+  </th>
+  <td>
+    <input id="id" type="text" name="id" placeholder="이름을 설정해주세요." maxlength="16" title="16자 까지 입력" required autofocus/>
+    <span class="point successidChk">이름은 2자 이상 8자 이하로 설정해주시기 바랍니다.<br/></span>
+    <input type="hidden" id="idDoubleChk"/>
+  </td>
+</tr>
+
   <tr class="mobileNo">
     <th>
       <label for="phone">휴대폰 번호</label>
@@ -23,5 +34,7 @@
       </p>
     </td>
   </tr>
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+<script src="/js/certified.js"></script>
 </body>
 </html>
