@@ -5,8 +5,7 @@ import lombok.*;
 import javax.persistence.*;
 
 @Entity     //여러 엔티티간 연관관계를 정의
-@Getter
-@Setter
+@Data
 
 @NoArgsConstructor
 @AllArgsConstructor

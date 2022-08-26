@@ -1,11 +1,11 @@
 package com.ff.furry_friend.dto;
 
 import lombok.AllArgsConstructor;
-import lombok.ToString;
+import lombok.Data;
 
 
 @AllArgsConstructor
-@ToString
+@Data
 public class productForm {
 
     private String pro_name;

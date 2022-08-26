@@ -2,12 +2,8 @@ package com.ff.furry_friend.dto;
 
 import lombok.*;
 
-import java.sql.Time;
-
 @AllArgsConstructor
-@ToString
-@Getter
-@Setter
+@Data
 @NoArgsConstructor
 public class UserForm {
 
