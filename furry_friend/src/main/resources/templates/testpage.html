@@ -1,39 +1,22 @@
 <!DOCTYPE html>
-<html>
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
 </head>
 <body>
-<tr>
-  <th>
-    <label for="id">아&emsp;이&emsp;디</label>
-  </th>
-  <td>
-    <input id="id" type="text" name="id" placeholder="이름을 설정해주세요." maxlength="16" title="16자 까지 입력" required autofocus/>
-    <span class="point successidChk">이름은 2자 이상 8자 이하로 설정해주시기 바랍니다.<br/></span>
-    <input type="hidden" id="idDoubleChk"/>
-  </td>
-</tr>
-
-  <tr class="mobileNo">
-    <th>
-      <label for="phone">휴대폰 번호</label>
-    </th>
-    <td>
-      <p>
-        <input id="phone" type="text" name="phone" title="전화번호 입력" required/>
-        <span id="phoneChk" class="doubleChk">인증번호 보내기</span><br/>
-        <input id="phone2" type="text" name="phone2" title="인증번호 입력" disabled required/>
-        <span id="phoneChk2" class="doubleChk">본인인증</span>
-        <span class="point successPhoneChk">휴대폰 번호 입력후 인증번호 보내기를 해주십시오.</span>
-        <input type="hidden" id="phoneDoubleChk"/>
-      </p>
-      <p class="tip">
-        최초 가입 시에만 사용하고 있습니다. 따로 저장되지 않습니다.(번호만 입력해주세요.)
-      </p>
-    </td>
-  </tr>
+<div class="form-group phoneCertifyDiv">
+  <label class="inputTitle">휴대폰 번호</label><br>
+  <div class="phoneNum-formgroup">
+    <input th:if="${phone != null}" type="text" name="phone" class="phoneNum" readonly th:value="${phone}">
+    <input th:unless="${phone != null}" type="text" name="phone" class="phoneNum" >
+    <input type="button" id="phoneCheck" class="btn memberPhoneBtn active" value="인증번호 전송">
+  </div>
+  <div class="phoneNum-formgroup" id="phoneCertifyDiv">
+    <input type="text" name="phoneCertify" class="phoneNum">
+    <input type="button" id="certifyCheck" class="btn phoneBtn" value="인증하기">
+  </div>
+</div>
 <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
 <script src="/js/certified.js"></script>
 </body>

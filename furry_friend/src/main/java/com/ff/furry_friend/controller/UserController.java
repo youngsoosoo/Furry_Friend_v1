@@ -85,15 +85,15 @@ public class UserController {
     }
 
     //ajax
-
+    //아이디 중복 확인
     @PostMapping("/idCheck")
     @ResponseBody
     public int idCheck(@RequestParam("id") String id) {
         return userService.nameCheck(id);
     }
 
-
-    @RequestMapping(value = "/phoneCheck", method = RequestMethod.GET)
+    //휴대폰 인증
+    @RequestMapping(value = "/phoneCheck", method = RequestMethod.POST)
     @ResponseBody
     public String sendSMS(@RequestParam("phone") String userPhoneNumber) { // 휴대폰 문자보내기
         int randomNumber = (int)((Math.random()* (9999 - 1000 + 1)) + 1000);//난수 생성
