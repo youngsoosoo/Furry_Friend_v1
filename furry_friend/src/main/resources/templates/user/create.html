@@ -4,44 +4,75 @@
 <body>
 <div class="container">
     <form th:action="@{/user/create}" method="post">
+
         <div class="form-group">
-            <label for="id">아이디</label>
+            <label for="id">아이디</label><br>
             <input type="text" id="id" name="id" placeholder="아이디를 입력하세요" maxlength="16" title="16자 까지 입력" required>
             <span class="point successidChk">아이디는 2자 이상 16자 이하로 설정해주시기 바랍니다.<br/></span>
             <input type="hidden" id="idDoubleChk"/>
         </div>
+
         <div class="form-group">
-            <label for="name">비밀번호</label>
+            <label for="name">비밀번호</label><br>
             <input type="password" id="pw" name="pw" placeholder="비밀번호를 입력하세요" required maxlength="8" autocomplete="off"/>
             <span class="point">※ 비밀번호는 총 8자 까지 입력가능</span>
         </div>
+
         <div class="form-group">
-            <label for="name">비밀번호 확인</label>
+            <label for="name">비밀번호 확인</label><br>
             <input type="password" id="pwchk" name="pwchk" placeholder="동일하게 입력해주세요." required maxlength="8" autocomplete="off"/>
             <span class="point successPwChk"></span>
             <input type="hidden" id="pwDoubleChk"/>
         </div>
+
         <div class="form-group">
-            <label for="name">주소</label>
+            <label for="address">주소</label><br>
             <input type="text" id="address" name="address" placeholder="주소을 입력하세요" required>
         </div>
+
         <div class="form-group">
-            <label for="name">이름</label>
+            <label for="name">이름</label><br>
             <input type="text" id="name" name="name" placeholder="이름을 입력하세요" required>
         </div>
-        <label class="inputTitle">휴대폰 번호</label><br>
+
+        <label for="phone">휴대폰 번호</label><br>
         <div class="phoneNum-formgroup">
-            <input th:if="${phone != null}" id="phone" type="text" name="phone" class="phoneNum" readonly th:value="${phone}">
-            <input th:unless="${phone != null}" type="text" name="phone" class="phoneNum" >
-            <input type="button" id="phoneCheck" class="btn memberPhoneBtn active" value="인증번호 전송">
+            <input id="phone" type="text" name="phone" title="전화번호 입력" required/>
+            <span id="phoneChk" class="doubleChk">인증번호 보내기</span><br/>
+            <input id="phone2" type="text" name="phone2" title="인증번호 입력" disabled required/>
+            <span id="phoneChk2" class="doubleChk">본인인증</span><br/>
+            <span class="point successPhoneChk">휴대폰 번호 입력후 인증번호 보내기를 해주십시오.</span>
+            <input type="hidden" id="phoneDoubleChk"/>
         </div>
-        <div class="phoneNum-formgroup" id="phoneCertifyDiv">
-            <input type="text" name="phoneCertify" class="phoneNum" required>
-            <input type="button" id="certifyCheck" class="btn phoneBtn" value="인증하기">
-        </div>
-        <button type="submit">회원가입</button>
+
+        <fieldset class="fieldarea f2">
+            <legend><span>이용</span>약관</legend>
+            <p class="agreeText">
+                <label for="agreement1">아래 사항에 동의 합니다.</label>
+                <input id="agreement1" type="checkbox" name="agreement1"/>
+                <textarea id="text1" readonly>
+			이용약관
+		</textarea>
+            </p>
+        </fieldset>
+        <fieldset class="fieldarea f3">
+            <legend><span>개인정보</span>취급방침</legend>
+            <p class="agreeText">
+                <label for="agreement2">아래 사항에 동의 합니다.</label>
+                <input id="agreement2" type="checkbox" name="agreement2"/>
+                <textarea id="text2" readonly>
+			개인정보 방침 및 안내
+		</textarea>
+            </p>
+        </fieldset>
+
+        <input type="submit" id="button1" value="회원가입"/>
+        <input type="reset" id="button2" value="다시쓰기" title="다시쓰기 버튼"/>
     </form>
 </div> <!-- /container -->
+
+
+
 <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
 <script src="/js/certified.js"></script>
 </body>
