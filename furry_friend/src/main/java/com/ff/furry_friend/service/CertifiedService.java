@@ -1,4 +1,4 @@
-package com.ff.furry_friend.repository.service;
+package com.ff.furry_friend.service;
 
 import net.nurigo.java_sdk.api.Message;
 import net.nurigo.java_sdk.exceptions.CoolsmsException;
