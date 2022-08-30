@@ -1,4 +1,4 @@
-package com.ff.furry_friend.repository.service;
+package com.ff.furry_friend.service;
 
 import com.ff.furry_friend.entity.product;
 import com.ff.furry_friend.repository.ProductRepository;

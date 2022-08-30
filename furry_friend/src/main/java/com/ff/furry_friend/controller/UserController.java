@@ -2,10 +2,10 @@ package com.ff.furry_friend.controller;
 
 import com.ff.furry_friend.dto.UserForm;
 import com.ff.furry_friend.entity.user;
-import com.ff.furry_friend.repository.service.CertifiedService;
-import com.ff.furry_friend.repository.service.KakaoAPI;
-import com.ff.furry_friend.repository.service.TestService;
-import com.ff.furry_friend.repository.service.UserService;
+import com.ff.furry_friend.service.CertifiedService;
+import com.ff.furry_friend.service.KakaoAPI;
+import com.ff.furry_friend.service.TestService;
+import com.ff.furry_friend.service.UserService;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
