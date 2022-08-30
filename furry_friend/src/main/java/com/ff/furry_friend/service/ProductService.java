@@ -1,4 +1,4 @@
-package com.ff.furry_friend.service;
+package com.ff.furry_friend.repository.service;
 
 import com.ff.furry_friend.entity.product;
 import com.ff.furry_friend.repository.ProductRepository;
@@ -11,6 +11,7 @@ import java.util.List;
 @Transactional
 @Service
 public class ProductService {
+
     @Autowired
     private final ProductRepository productRepository;
 

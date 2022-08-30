@@ -1,4 +1,4 @@
-package com.ff.furry_friend.service;
+package com.ff.furry_friend.repository.service;
 
 import com.ff.furry_friend.dto.UserForm;
 import com.ff.furry_friend.entity.user;
@@ -13,50 +13,76 @@ import java.util.Optional;
 @Transactional
 @Service
 public class UserService {
+
     @Autowired
     private final UserRepository userRepository;
 
-    public UserService(UserRepository userRepository){
+    public UserService(UserRepository userRepository) {
         this.userRepository = userRepository;
     }
+
+
     /**
      * 회원가입
      */
-    public Long create(user user) {
+    public int create(user user) {
+        System.out.println(user);
         validateDuplicateMember(user); //중복 회원 검증
         userRepository.save(user);
         return user.getCreate_id();
     }
-    public int Login(UserForm form){
+
+    public boolean Login(UserForm form) {
         Optional<user> result = userRepository.findById(form.getId());
-        if(!result.get().getId().equals(form.getId())){
-            return 0;
+        if (!result.get().getId().equals(form.getId())) {
+            return false;
         }
-        if(!result.get().getPw().equals(form.getPw())){
-            return 0;
+        if (!result.get().getPw().equals(form.getPw())) {
+            return false;
         }
-        return 1;
+        return true;
     }
-    private void validateDuplicateMember(user user) {
-        userRepository.findByName(user.getName())
+
+    public String findById(UserForm form){
+        Optional<user> result = userRepository.findById(form.getId());
+
+        return result.get().getId();
+    }
+
+    public String findByPw(UserForm form){
+        Optional<user> result = userRepository.findById(form.getId());
+
+        return result.get().getPw();
+    }
+
+    public void validateDuplicateMember(user user) {
+        userRepository.findById(user.getId())
                 .ifPresent(m -> {
-                    throw new IllegalStateException("이미 존재하는 회원입니다.");
+                    throw new IllegalStateException("이미 존재하는 회원 아이디입니다.");
                 });
     }
 
-    private void findId(user user){
+    private void findId(user user) {
         userRepository.findById(user.getId())
                 .ifPresent(m -> {
                     throw new IllegalStateException("이미 존재하는 회원입니다.");
                 });
     }
+
     /**
      * 전체 회원 조회
      */
     public List<user> findUsers() {
         return userRepository.findAll();
     }
-    public Optional<user> findOne(String id) {
-        return userRepository.findById(id);
+
+    public Optional<user> findOne(int id) {
+        return userRepository.findByCreate_Id(id);
     }
+
+    public int nameCheck(String id) {
+        System.out.println(userRepository.findid(id));
+        return userRepository.findid(id);
+    }
+
 }
