@@ -10,6 +10,9 @@ import java.util.List;
 public interface ProductRepository {
     List<product> findByCategoty(Integer category);
     List<product> findByName(String name);
+
+    List<product> findPartName(String name);
+
     List<product> findAll();
 
 

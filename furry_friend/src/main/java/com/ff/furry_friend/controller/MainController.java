@@ -33,6 +33,14 @@ public class MainController {
         return "category";
     }
 
+    @PostMapping("search")
+    public String Search(@RequestParam(value = "search", required = false) String search, Model model){
+        List<product> li = productService.findPartName(search);
+        model.addAttribute("li", li);
+        System.out.println(search);
+        return "category";
+    }
+
     @GetMapping("category")
     public String category(@RequestParam(value = "category", required = false) int category, Model model){
         if(category < 10){//카테고리 값이 없다면 실행 x 수정 필요

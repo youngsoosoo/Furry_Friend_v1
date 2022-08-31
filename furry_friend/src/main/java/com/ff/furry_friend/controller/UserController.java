@@ -71,17 +71,37 @@ public class UserController {
 
 
     @GetMapping("/user/kakao")
-    public String getCI(@RequestParam String code, Model model) throws IOException {
+    public String getCI(@RequestParam String code, Model model, HttpSession session) throws IOException {
         System.out.println("code = " + code);
         String access_token = kakaoAPI.getToken(code);
         Map<String, Object> userInfo = kakaoAPI.getUserInfo(access_token);
+        session.setAttribute("access_token", access_token);
         model.addAttribute("code", code);
         model.addAttribute("access_token", access_token);
         model.addAttribute("userInfo", userInfo);
-        System.out.println(userInfo.get("id").toString() + userInfo.get("nickname").toString() + userInfo.get("email").toString());
+        System.out.println(userInfo.get("id").toString() + userInfo.get("nickname") + userInfo.get("email").toString());
 
         //ci는 비즈니스 전환후 검수신청 -> 허락받아야 수집 가능
         return "user/logininformation";
+    }
+
+    @RequestMapping(value="/logout")
+    public String logout(HttpSession session) {
+        System.out.println("3");
+        String access_Token = (String)session.getAttribute("access_Token");
+
+        if(access_Token != null && !"".equals(access_Token)){
+            System.out.println("1");
+            kakaoAPI.kakaoLogout(access_Token);
+            session.removeAttribute("access_Token");
+            //session.removeAttribute("id");
+        }else{
+            System.out.println("2");
+            System.out.println("access_Token is null");
+            //return "redirect:/";
+        }
+        //return "index";
+        return "redirect:/user/login";
     }
 
     //ajax
@@ -108,11 +128,4 @@ public class UserController {
         return "testpage";
     }
 
-//    @RequestMapping(value="/logout")
-//    public String logout(HttpSession session) {
-//        kakaoLoginService.kakaoLogout((String)session.getAttribute("access_Token"));
-//        session.removeAttribute("access_Token");
-//        session.removeAttribute("userId");
-//        return "user/login";
-//    }
 }

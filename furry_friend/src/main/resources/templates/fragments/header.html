@@ -5,7 +5,11 @@
     <meta name="viewport" content="width=device-width">
     <title>Insert title here</title>
 </head>
-
+<script>
+    function search(name){
+        location = "/search?name=" + name;
+    }
+</script>
 <!--footerFragment 선언-->
 <div th:fragment="headerFragment">
     <nav class="navbar navbar-expand-lg bg-light">
@@ -48,8 +52,8 @@
                         </ul>
                     </li>
                 </ul>
-                <form class="d-flex" role="search">
-                    <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+                <form class="d-flex" role="search" action="/search" method="post">
+                    <input class="form-control me-2" type="search" id="search" name="search" placeholder="Search" aria-label="Search">
                     <button class="btn btn-outline-success" type="submit">Search</button>
                 </form>
             </div>

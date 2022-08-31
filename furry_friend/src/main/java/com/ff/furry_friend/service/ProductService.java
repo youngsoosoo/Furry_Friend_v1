@@ -19,7 +19,6 @@ public class ProductService {
         this.productRepository = productRepository;
     }
 
-
     public List<product> findCategory(Integer category) {
         return productRepository.findByCategoty(category);
     }
@@ -28,9 +27,11 @@ public class ProductService {
         return productRepository.findByName(name);
     }
 
+    public List<product> findPartName(String name) {
+        return productRepository.findPartName(name);
+    }
+
     public List<product> findAll() {
         return productRepository.findAll();
     }
-
-
 }
