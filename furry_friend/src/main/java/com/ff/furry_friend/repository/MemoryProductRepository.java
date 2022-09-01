@@ -42,6 +42,4 @@ public class MemoryProductRepository implements ProductRepository {
     public List<product> findAll() {
         return em.createQuery("select p from product p", product.class).getResultList();
     }
-
-
 }

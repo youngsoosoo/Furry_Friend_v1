@@ -72,8 +72,8 @@ public class UserService {
     /**
      * 전체 회원 조회
      */
-    public List<user> findUsers() {
-        return userRepository.findAll();
+    public Optional<user> findUsers(String id) {
+        return userRepository.findById(id);
     }
 
     public Optional<user> findOne(int id) {
