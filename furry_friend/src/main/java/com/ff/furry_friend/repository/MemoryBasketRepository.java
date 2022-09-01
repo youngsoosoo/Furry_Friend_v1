@@ -9,7 +9,7 @@ import java.util.Optional;
 public class MemoryBasketRepository implements BasketRepository{
 
     private final EntityManager em;
-    private static long sequence = 0L;
+    private static int sequence = 0;
 
     public MemoryBasketRepository(EntityManager em) {
         this.em = em;
@@ -18,7 +18,7 @@ public class MemoryBasketRepository implements BasketRepository{
     @Override
     public basket shopping(basket basket){
         basket.setBasket_id(sequence++);
-        em.merge(basket);
+        em.persist(basket);
         return basket;
     }
 

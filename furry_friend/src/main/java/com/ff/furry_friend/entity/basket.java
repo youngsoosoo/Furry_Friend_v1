@@ -14,7 +14,7 @@ public class basket {
 
     @Id
     @GeneratedValue
-    private Long basket_id;
+    private int basket_id;
 
     @Column(nullable = false)
     private Integer amount;

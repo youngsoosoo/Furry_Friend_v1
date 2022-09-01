@@ -8,7 +8,17 @@
 <script th:inline="javascript">
 
 function purchase(name){
+    // var f = document.formTag;
     location = "/purchase?name=" + name;
+    // $('#btnpur').click(function(){
+    //     var phone = $("#phone").val();
+    //     $.ajax({
+    //         url : "/purchase",
+    //         type : "POST",
+    //         data : "name=" + name,
+    //         dataType : "json",
+    //     });
+    // });
 }
 
 function shopping_basket(name){
