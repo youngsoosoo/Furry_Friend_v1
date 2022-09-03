@@ -64,7 +64,7 @@ public class UserController {
             return "/user/login";
         } else{
             System.out.println("로그인 성공");
-            session.setAttribute("userid", form.getId());
+            session.setAttribute("id", form.getId());
             return "redirect:/all";
         }
     }

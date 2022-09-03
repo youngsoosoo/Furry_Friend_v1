@@ -1,7 +1,5 @@
 package com.ff.furry_friend.controller;
 
-import com.ff.furry_friend.dto.UserForm;
-import com.ff.furry_friend.dto.basketForm;
 import com.ff.furry_friend.entity.basket;
 import com.ff.furry_friend.entity.product;
 import com.ff.furry_friend.entity.user;
@@ -14,7 +12,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.servlet.http.HttpSession;
@@ -74,16 +71,5 @@ public class MainController {
     public String Purchase(@RequestParam(value = "name") String name){  //구매
         System.out.println(name);
         return null;
-    }
-
-    @PostMapping("basket")
-    public void Shopping_basket(@RequestParam(value = "name") String name, HttpSession session){   //장바구니
-        List<product> li = productService.findName(name);
-        Optional<user> result = userService.findUsers((String) session.getAttribute("userid"));
-        basket ba = new basket();
-        ba.setProduct(li.get(0));
-        ba.setAmount(1);
-        ba.setUser(result.get());
-        basketService.shopping(ba);
     }
 }

@@ -11,4 +11,6 @@ public interface BasketRepository {
     basket shopping(basket basket);
 
     Optional<basket> findByName(String name);
+
+    Optional<basket> findUserBasket(String id);
 }

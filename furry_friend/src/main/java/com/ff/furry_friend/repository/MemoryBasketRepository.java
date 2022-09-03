@@ -29,4 +29,12 @@ public class MemoryBasketRepository implements BasketRepository{
                 .getResultList();
         return result.stream().findAny();
     }
+
+    @Override
+    public Optional<basket> findUserBasket(String id){
+        List<basket> result = em.createQuery("select b from basket b where b.user.id = :id", basket.class)
+                .setParameter("id", id)
+                .getResultList();
+        return result.stream().findAny();
+    }
 }

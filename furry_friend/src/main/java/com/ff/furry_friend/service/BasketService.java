@@ -7,6 +7,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.Optional;
+
 @Transactional
 @Service
 public class BasketService {
@@ -29,5 +31,10 @@ public class BasketService {
                 .ifPresent(m -> {
                     throw new IllegalStateException("이미 존재하는 상품입니다.");
                 });
+    }
+
+    public Optional<basket> findUserBasket(String id){
+        Optional<basket> result = basketRepository.findUserBasket(id);
+        return result;
     }
 }
