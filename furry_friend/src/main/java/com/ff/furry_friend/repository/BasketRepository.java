@@ -13,4 +13,6 @@ public interface BasketRepository {
     Optional<basket> findByName(String name);
 
     Optional<basket> findUserBasket(String id);
+
+    void DeleteBasket(String id);
 }

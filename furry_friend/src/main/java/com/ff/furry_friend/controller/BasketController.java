@@ -48,4 +48,10 @@ public class BasketController {
         model.addAttribute("li", result.get());
         return "basket/check";
     }
+
+    @PostMapping("/basket/delete")
+    public String Delete(@RequestParam(value = "name") String name, HttpSession session){
+        basketService.DeleteBasket(name);
+        return "redirect:/basket/check";
+    }
 }

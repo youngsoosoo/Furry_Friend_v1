@@ -37,4 +37,8 @@ public class BasketService {
         Optional<basket> result = basketRepository.findUserBasket(id);
         return result;
     }
+
+    public void DeleteBasket(String id){
+        basketRepository.DeleteBasket(id);
+    }
 }

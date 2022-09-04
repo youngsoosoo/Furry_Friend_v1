@@ -37,4 +37,11 @@ public class MemoryBasketRepository implements BasketRepository{
                 .getResultList();
         return result.stream().findAny();
     }
+
+    @Override
+    public void DeleteBasket(String id){
+        basket ba = new basket();
+        //수정 필요
+        em.remove(ba);
+    }
 }
