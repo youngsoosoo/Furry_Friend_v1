@@ -51,7 +51,7 @@ public class BasketController {
 
     @PostMapping("/basket/delete")
     public String Delete(@RequestParam(value = "name") String name, HttpSession session){
-        basketService.DeleteBasket(name);
+        basketService.DeleteBasket(name, (String) session.getAttribute("id"));
         return "redirect:/basket/check";
     }
 }

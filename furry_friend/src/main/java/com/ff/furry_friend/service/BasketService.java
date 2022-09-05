@@ -38,7 +38,7 @@ public class BasketService {
         return result;
     }
 
-    public void DeleteBasket(String id){
-        basketRepository.DeleteBasket(id);
+    public void DeleteBasket(String name, String id){
+        basketRepository.DeleteBasket(name, id);
     }
 }
