@@ -20,6 +20,7 @@ public class SpringConfig {
         this.em = em;
     }
 
+
     public ProductService productService() {
         return new ProductService(productRepository());
     }

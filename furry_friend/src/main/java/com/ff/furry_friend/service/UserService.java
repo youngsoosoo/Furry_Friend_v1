@@ -85,4 +85,7 @@ public class UserService {
         return userRepository.findid(id);
     }
 
+    public int findCreate_id(String id){
+        return userRepository.findCreate_id(id);
+    }
 }

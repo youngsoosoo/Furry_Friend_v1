@@ -18,4 +18,6 @@ public interface UserRepository {
     List<user> findAll();
 
     int findid(String id);
+
+    int findCreate_id(String id);
 }

@@ -10,6 +10,7 @@ import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -45,13 +46,19 @@ public class BasketController {
     @GetMapping("/basket/check")
     public String Check(HttpSession session, Model model){
         Optional<basket> result = basketService.findUserBasket((String) session.getAttribute("id"));
-        model.addAttribute("li", result.get());
-        return "basket/check";
+        if(result.isEmpty()){
+            return "basket/check";
+        }else{
+            model.addAttribute("li", result.get());
+            return "basket/check";
+        }
+
     }
 
-    @PostMapping("/basket/delete")
-    public String Delete(@RequestParam(value = "name") String name, HttpSession session){
-        basketService.DeleteBasket(name, (String) session.getAttribute("id"));
-        return "redirect:/basket/check";
+    @GetMapping("/basket/delete")
+    public String Delete(@RequestParam(value = "pro_id") Long pro_id, HttpSession session){
+        int id = userService.findCreate_id((String) session.getAttribute("id"));
+        basketService.DeleteBasket(pro_id, id);
+        return "basket/check";
     }
 }

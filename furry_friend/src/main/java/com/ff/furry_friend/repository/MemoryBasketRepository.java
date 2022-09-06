@@ -4,6 +4,7 @@ import com.ff.furry_friend.entity.basket;
 import com.ff.furry_friend.entity.product;
 
 import javax.persistence.EntityManager;
+import javax.persistence.Query;
 import java.util.List;
 import java.util.Optional;
 
@@ -40,16 +41,15 @@ public class MemoryBasketRepository implements BasketRepository{
     }
 
     @Override
-    public void DeleteBasket(String name, String id){
-        em.createQuery("select b from user b where b.create_id = :id", basket.class)
-                .setParameter("id", id);
+    public void DeleteBasket(Long pro_id, int id){
         product pro = new product();
-        pro.setPro_name(name);
+        pro.setPro_id(pro_id);
         basket ba = new basket();
         ba.setProduct(pro);
         //수정 필요
-        em.createQuery("delete from basket b where b.user.create_id = :id and b.product.pro_name = :name", basket.class)
+        Query query = em.createQuery("delete from basket b where b.user.create_id = :id and b.product.pro_id = :pro_id")
                 .setParameter("id", id)
-                .setParameter("name", name);
+                .setParameter("pro_id", pro_id);
+        query.executeUpdate();
     }
 }
