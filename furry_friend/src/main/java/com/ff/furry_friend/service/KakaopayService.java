@@ -68,7 +68,7 @@ public class KakaopayService {
 
         return "/pay";
     }
-    public KakaoPayApprovalVO kakaoPayInfo(String pg_token, int coin, String userid) {  //결제 정보를 알려줌
+    public KakaoPayApprovalVO kakaoPayInfo(String pg_token, product pro, String userid) {  //결제 정보를 알려줌
 
         log.info("KakaoPayInfoVO............................................");
         log.info("-----------------------------");
@@ -88,7 +88,7 @@ public class KakaopayService {
         params.add("partner_order_id", "1");
         params.add("partner_user_id", userid);
         params.add("pg_token", pg_token);
-        params.add("total_amount", String.valueOf(coin * 500));
+        params.add("total_amount", String.valueOf(pro.getPro_price()));
 
         HttpEntity<MultiValueMap<String, String>> body = new HttpEntity<MultiValueMap<String, String>>(params, headers);
 

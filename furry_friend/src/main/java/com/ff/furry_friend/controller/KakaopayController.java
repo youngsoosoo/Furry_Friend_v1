@@ -30,17 +30,19 @@ public class KakaopayController {   //카카오 페이 결제 컨트롤러
     }
 
     @PostMapping("/kakaoPay")   // POST로 방식으로 kakaoPayReady에 coin 값과 userid 값을 넘겨준다.
-    public String kakaoPay(@RequestParam(name = "coin") int coin/*값으로 넘겨준 coin*/, HttpSession session) { //카카오페이 결제하기 버튼을 눌러 넘어오는 페이지
+    public String kakaoPay(@RequestParam(name = "pro") product pro/*값으로 넘겨준 coin*/, HttpSession session) { //카카오페이 결제하기 버튼을 눌러 넘어오는 페이지
         product pro = new product();
         //product set 해야함
-        return "redirect:" + kakaopay.kakaoPayReady(pro, (String)session.getAttribute("userid"));
+        return "redirect:" + kakaopay.kakaoPayReady(pro, (String)session.getAttribute("id"));
     }
 
     @GetMapping("/kakaoPaySuccess") //kakaopay 결제가 성공했을때 호출된다.
-    public void kakaoPaySuccess(@RequestParam("pg_token") String pg_token, Model model, HttpSession session, @RequestParam("coin") int coin/*주소로 보내준 파라미터*/) {//성공시 보여주는 페이지
+    public void kakaoPaySuccess(@RequestParam("pg_token") String pg_token, Model model, HttpSession session, @RequestParam("pro") product pro/*주소로 보내준 파라미터*/) {//성공시 보여주는 페이지
         log.info("kakaoPaySuccess get............................................");
         log.info("kakaoPaySuccess pg_token : " + pg_token);
+        product pro = new product();
 
-        model.addAttribute("info", kakaopay.kakaoPayInfo(pg_token, coin, (String)session.getAttribute("userid")));
+
+        model.addAttribute("info", kakaopay.kakaoPayInfo(pg_token, pro, (String)session.getAttribute("id")));
     }
 }
