@@ -17,6 +17,7 @@ import org.springframework.web.client.RestTemplate;
 
 import java.net.URI;
 import java.net.URISyntaxException;
+import java.util.List;
 
 @Service    //해당 클래스는 Service
 @Log
@@ -28,7 +29,7 @@ public class KakaopayService {
     private KakaoPayVO kakaoPayVO;
     private KakaoPayApprovalVO kakaoPayApprovalVO;
 
-    public String kakaoPayReady(product pro, String userid) {  //결제를 함.
+    public String kakaoPayReady(List<product> pro, String userid) {  //결제를 함.
 
         RestTemplate restTemplate = new RestTemplate();
 
@@ -41,11 +42,11 @@ public class KakaopayService {
         // 서버로 요청할 Body
         MultiValueMap<String, String> params = new LinkedMultiValueMap<String, String>();
         params.add("cid", "TC0ONETIME");            // 가맹점 코드
-        params.add("partner_order_id", Long.toString(pro.getPro_id()));     // 가맹점 주문 번호
+        params.add("partner_order_id", Long.toString(pro.get(0).getPro_id()));     // 가맹점 주문 번호
         params.add("partner_user_id", userid);    // 가맹점 회원 아이디
-        params.add("item_name", pro.getPro_name());            // 상품명
-        params.add("quantity", pro.getPro_number());                // 상품 수량
-        params.add("total_amount", Integer.toString(pro.getPro_price()));         // 상품 총액
+        params.add("item_name", pro.get(0).getPro_name());            // 상품명
+        params.add("quantity", pro.get(0).getPro_number());                // 상품 수량
+        params.add("total_amount", Integer.toString(pro.get(0).getPro_price()));         // 상품 총액
         params.add("tax_free_amount", "100");       // 상품 비과세 금액
         params.add("approval_url", "http://localhost:8080/kakaoPaySuccess");    // 결제 성공시
         params.add("cancel_url", "http://localhost:8080/kakaoPay");       // 결제 취소시
@@ -68,7 +69,7 @@ public class KakaopayService {
 
         return "/pay";
     }
-    public KakaoPayApprovalVO kakaoPayInfo(String pg_token, product pro, String userid) {  //결제 정보를 알려줌
+    public KakaoPayApprovalVO kakaoPayInfo(String pg_token, List<product> pro, String userid) {  //결제 정보를 알려줌
 
         log.info("KakaoPayInfoVO............................................");
         log.info("-----------------------------");
@@ -88,7 +89,7 @@ public class KakaopayService {
         params.add("partner_order_id", "1");
         params.add("partner_user_id", userid);
         params.add("pg_token", pg_token);
-        params.add("total_amount", String.valueOf(pro.getPro_price()));
+        params.add("total_amount", String.valueOf(pro.get(0).getPro_price()));
 
         HttpEntity<MultiValueMap<String, String>> body = new HttpEntity<MultiValueMap<String, String>>(params, headers);
 

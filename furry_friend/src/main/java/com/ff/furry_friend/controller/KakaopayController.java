@@ -1,6 +1,8 @@
 package com.ff.furry_friend.controller;
 
+import com.ff.furry_friend.dto.KakaoPay.KakaoPayApprovalVO;
 import com.ff.furry_friend.entity.product;
+import com.ff.furry_friend.repository.ProductRepository;
 import com.ff.furry_friend.service.KakaopayService;
 import groovy.util.logging.Slf4j;
 import lombok.RequiredArgsConstructor;
@@ -14,6 +16,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.servlet.http.HttpSession;
+import java.util.List;
 
 @Log                        //로그는 기록을 남기는 어노테이션
 @Controller                 //컨트롤러 어노테이션
@@ -23,26 +26,29 @@ public class KakaopayController {   //카카오 페이 결제 컨트롤러
 
     @Setter(onMethod_ = @Autowired) //자동 연결
     private KakaopayService kakaopay;
+    @Autowired
+    ProductRepository productRepository;
 
     @GetMapping("/kakaoPay")    // kakaopay.mustache 뷰를 반환함.
     public String kakaoPayGet() {
         return "/kakaopay";
     }
 
-    @PostMapping("/kakaoPay")   // POST로 방식으로 kakaoPayReady에 coin 값과 userid 값을 넘겨준다.
-    public String kakaoPay(@RequestParam(name = "pro") product pro/*값으로 넘겨준 coin*/, HttpSession session) { //카카오페이 결제하기 버튼을 눌러 넘어오는 페이지
-        product pro = new product();
+    @PostMapping("/kakaoPay")   // POST로 방식으로 kakaoPayReady에 name 값과 userid 값을 넘겨준다.
+    public String kakaoPay(@RequestParam(name = "name", required=false) String name/*값으로 넘겨준 name*/, HttpSession session) { //카카오페이 결제하기 버튼을 눌러 넘어오는 페이지
+        List<product> pro = productRepository.findByName(name);
         //product set 해야함
         return "redirect:" + kakaopay.kakaoPayReady(pro, (String)session.getAttribute("id"));
     }
 
     @GetMapping("/kakaoPaySuccess") //kakaopay 결제가 성공했을때 호출된다.
-    public void kakaoPaySuccess(@RequestParam("pg_token") String pg_token, Model model, HttpSession session, @RequestParam("pro") product pro/*주소로 보내준 파라미터*/) {//성공시 보여주는 페이지
+    public void kakaoPaySuccess(@RequestParam("pg_token") String pg_token, Model model, HttpSession session, @RequestParam(name = "name") String name/*주소로 보내준 파라미터*/) {//성공시 보여주는 페이지
         log.info("kakaoPaySuccess get............................................");
         log.info("kakaoPaySuccess pg_token : " + pg_token);
-        product pro = new product();
+        List<product> pro = productRepository.findByName(name);
 
+        KakaoPayApprovalVO kakao = kakaopay.kakaoPayInfo(pg_token, pro, (String)session.getAttribute("id"));
 
-        model.addAttribute("info", kakaopay.kakaoPayInfo(pg_token, pro, (String)session.getAttribute("id")));
+        model.addAttribute("info", kakao);
     }
 }

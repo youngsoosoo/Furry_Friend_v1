@@ -8,7 +8,19 @@
 <script th:inline="javascript">
 
 function purchase(name){
-    location = "/purchase?name=" + name;
+    var form = document.createElement('form');
+    form.setAttribute('method', 'post');
+    form.setAttribute('action', '/kakaoPay');
+    document.charset = "utf-8";
+
+    var hiddenField = document.createElement('input');
+    hiddenField.setAttribute('type', 'hidden');
+    hiddenField.setAttribute('name', 'name');
+    hiddenField.setAttribute('value', name);
+    form.appendChild(hiddenField);
+
+    document.body.appendChild(form);
+    form.submit();
 }
 
 function shopping_basket(name){
@@ -23,11 +35,6 @@ function shopping_basket(name){
     hiddenField.setAttribute('value', name);
     form.appendChild(hiddenField);
 
-    // hiddenField = document.createElement("input");
-    // hiddenField.setAttribute("type", "hidden");
-    // hiddenField.setAttribute("name", "number");
-    // hiddenField.setAttribute("value", document.getElementById('number'));
-    // form.appendChild(hiddenField);
     document.body.appendChild(form);
     form.submit();
 }
@@ -50,6 +57,7 @@ function shopping_basket(name){
                 </div>
                 <input type="number" name="number" min="1" max="9" default="1">
                 <button type="button" class="btn btn-dark" th:id="${item.getPro_name()}" th:onclick="purchase(this.getAttribute('id'))">구매</button>
+
                 <button type="button" class="btn btn-light" th:id="${item.getPro_name()}" th:onclick="shopping_basket(this.getAttribute('id'))">장바구니</button>
             </div>
         </div>
