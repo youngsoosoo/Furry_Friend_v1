@@ -7,12 +7,12 @@
 <body>
 <div style="display:table-cell; vertical-align: middle;">
     <h2>카카오페이 결제가 정상적으로 완료되었습니다.<br/></h2>
-    <div class="input-box">
-        <h3 th:each="item : ${info}">
-            <li th:text="|결제일시 = ${item}|">결제일시</li>
-<!--            <li th:text="|상품명 = ${item.getItem_name()}|">상품명</li>-->
-<!--            <li th:text="|사용자 = ${item.getPartner_user_id()}|">사용자</li>-->
-<!--            <li th:text="|결제금액 = ${item.getAmount().getTotal()}|">결제금액</li>-->
+    <div class="input-box" >
+        <h3>
+            결제일시 = [[${info.approved_at}]]
+            상품명 = [[${info.item_name}]]
+            사용자 = [[${info.partner_user_id}]]
+            결제금액 = [[${info.amount.total}]]
         </h3>
     </div>
 </div>

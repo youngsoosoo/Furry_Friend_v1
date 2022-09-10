@@ -47,8 +47,11 @@ public class KakaopayController {   //카카오 페이 결제 컨트롤러
         log.info("kakaoPaySuccess pg_token : " + pg_token);
         List<product> pro = productRepository.findByName(name);
 
-        KakaoPayApprovalVO kakao = kakaopay.kakaoPayInfo(pg_token, pro, (String)session.getAttribute("id"));
+        model.addAttribute("info", kakaopay.kakaoPayInfo(pg_token, pro, (String)session.getAttribute("id")));
+    }
 
-        model.addAttribute("info", kakao);
+    @GetMapping("/paySuccess")
+    public String paySuccess(){
+        return "paySuccess";
     }
 }

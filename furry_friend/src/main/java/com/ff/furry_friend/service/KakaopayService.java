@@ -48,7 +48,7 @@ public class KakaopayService {
         params.add("quantity", pro.get(0).getPro_number());                // 상품 수량
         params.add("total_amount", Integer.toString(pro.get(0).getPro_price()));         // 상품 총액
         params.add("tax_free_amount", "100");       // 상품 비과세 금액
-        params.add("approval_url", "http://localhost:8080/kakaoPaySuccess");    // 결제 성공시
+        params.add("approval_url", "http://localhost:8080/paySuccess");    // 결제 성공시
         params.add("cancel_url", "http://localhost:8080/kakaoPay");       // 결제 취소시
         params.add("fail_url", "http://localhost:8080/kakaoPaySuccessFail");    // 결제 실패시
 
