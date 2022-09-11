@@ -32,7 +32,6 @@ public class KakaopayService {
     public String kakaoPayReady(List<product> pro, String userid) {  //결제를 함.
 
         RestTemplate restTemplate = new RestTemplate();
-
         // 서버로 요청할 Header
         HttpHeaders headers = new HttpHeaders();
         headers.add("Authorization", "KakaoAK " + "3ef51cabada59b06583801b742c8ec3b");
@@ -48,7 +47,7 @@ public class KakaopayService {
         params.add("quantity", pro.get(0).getPro_number());                // 상품 수량
         params.add("total_amount", Integer.toString(pro.get(0).getPro_price()));         // 상품 총액
         params.add("tax_free_amount", "100");       // 상품 비과세 금액
-        params.add("approval_url", "http://localhost:8080/paySuccess");    // 결제 성공시
+        params.add("approval_url", "http://localhost:8080/paySuccess?name=" + pro.get(0).getPro_name());    // 결제 성공시
         params.add("cancel_url", "http://localhost:8080/kakaoPay");       // 결제 취소시
         params.add("fail_url", "http://localhost:8080/kakaoPaySuccessFail");    // 결제 실패시
 
@@ -67,7 +66,7 @@ public class KakaopayService {
             e.printStackTrace();
         }
 
-        return "/pay";
+        return "/paySuccess";
     }
     public KakaoPayApprovalVO kakaoPayInfo(String pg_token, List<product> pro, String userid) {  //결제 정보를 알려줌
 

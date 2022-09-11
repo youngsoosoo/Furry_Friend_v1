@@ -41,17 +41,14 @@ public class KakaopayController {   //카카오 페이 결제 컨트롤러
         return "redirect:" + kakaopay.kakaoPayReady(pro, (String)session.getAttribute("id"));
     }
 
-    @GetMapping("/kakaoPaySuccess") //kakaopay 결제가 성공했을때 호출된다.
-    public void kakaoPaySuccess(@RequestParam("pg_token") String pg_token, Model model, HttpSession session, @RequestParam(name = "name") String name/*주소로 보내준 파라미터*/) {//성공시 보여주는 페이지
+    @GetMapping("/paySuccess") //kakaopay 결제가 성공했을때 호출된다.
+    public void kakaoPaySuccess(@RequestParam("pg_token") String pg_token, Model model, HttpSession session, @RequestParam(name = "name",  required=false) String name/*주소로 보내준 파라미터*/) {//성공시 보여주는 페이지
         log.info("kakaoPaySuccess get............................................");
         log.info("kakaoPaySuccess pg_token : " + pg_token);
+        log.info(name);
         List<product> pro = productRepository.findByName(name);
 
-        model.addAttribute("info", kakaopay.kakaoPayInfo(pg_token, pro, (String)session.getAttribute("id")));
-    }
-
-    @GetMapping("/paySuccess")
-    public String paySuccess(){
-        return "paySuccess";
+        KakaoPayApprovalVO li = kakaopay.kakaoPayInfo(pg_token, pro, (String)session.getAttribute("id"));
+        model.addAttribute("info", li);
     }
 }
