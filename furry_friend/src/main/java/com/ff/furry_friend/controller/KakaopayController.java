@@ -1,8 +1,13 @@
 package com.ff.furry_friend.controller;
 
 import com.ff.furry_friend.dto.KakaoPay.KakaoPayApprovalVO;
+import com.ff.furry_friend.entity.basket;
 import com.ff.furry_friend.entity.product;
+import com.ff.furry_friend.entity.user;
+import com.ff.furry_friend.repository.BasketRepository;
 import com.ff.furry_friend.repository.ProductRepository;
+import com.ff.furry_friend.repository.UserRepository;
+import com.ff.furry_friend.service.BasketService;
 import com.ff.furry_friend.service.KakaopayService;
 import groovy.util.logging.Slf4j;
 import lombok.RequiredArgsConstructor;
@@ -17,6 +22,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.servlet.http.HttpSession;
 import java.util.List;
+import java.util.Optional;
 
 @Log                        //로그는 기록을 남기는 어노테이션
 @Controller                 //컨트롤러 어노테이션
@@ -28,6 +34,12 @@ public class KakaopayController {   //카카오 페이 결제 컨트롤러
     private KakaopayService kakaopay;
     @Autowired
     ProductRepository productRepository;
+    @Autowired
+    UserRepository userRepository;
+    @Autowired
+    BasketRepository basketRepository;
+    @Autowired
+    BasketService basketService;
 
     @GetMapping("/kakaoPay")    // kakaopay.mustache 뷰를 반환함.
     public String kakaoPayGet() {
@@ -47,8 +59,17 @@ public class KakaopayController {   //카카오 페이 결제 컨트롤러
         log.info("kakaoPaySuccess pg_token : " + pg_token);
         log.info(name);
         List<product> pro = productRepository.findByName(name);
-
-        KakaoPayApprovalVO li = kakaopay.kakaoPayInfo(pg_token, pro, (String)session.getAttribute("id"));
-        model.addAttribute("info", li);
+        Optional<basket> ba = basketRepository.findByName(name);
+        Optional<user> user = userRepository.findById((String)session.getAttribute("id"));
+        /*장바구니에 담겨있던 상품이라면 제거와 결제 아니라면 그냥 결제, 파라미터로 이름과 id를 받아야함*/
+        if(ba.get().getProduct().getPro_name().equals(name) && ba.get().getUser().getId().equals((String)session.getAttribute("id"))){
+            KakaoPayApprovalVO li = kakaopay.kakaoPayInfo(pg_token, pro, (String)session.getAttribute("id"));
+            basketService.DeleteBasket(ba.get().getProduct().getPro_id(), user.get().getCreate_id());
+            model.addAttribute("info", li);
+        }
+        else{
+            KakaoPayApprovalVO li = kakaopay.kakaoPayInfo(pg_token, pro, (String)session.getAttribute("id"));
+            model.addAttribute("info", li);
+        }
     }
 }

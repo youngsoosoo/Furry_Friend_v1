@@ -22,6 +22,21 @@
         document.body.appendChild(form);
         form.submit();
     }
+    function purchase(name){
+        var form = document.createElement('form');
+        form.setAttribute('method', 'post');
+        form.setAttribute('action', '/kakaoPay');
+        document.charset = "utf-8";
+
+        var hiddenField = document.createElement('input');
+        hiddenField.setAttribute('type', 'hidden');
+        hiddenField.setAttribute('name', 'name');
+        hiddenField.setAttribute('value', name);
+        form.appendChild(hiddenField);
+
+        document.body.appendChild(form);
+        form.submit();
+    }
 </script>
 <body>
 <header th:replace="fragments/header.html::headerFragment"></header>
@@ -33,6 +48,7 @@
                     <div class="card-body">
                         <h5 class="card-title" th:text="${item.getProduct().getPro_name}"></h5>
                     </div>
+                <button type="button" class="btn btn-dark" th:id="${item.getProduct().getPro_name()}" th:onclick="purchase(this.getAttribute('id'))">구매</button>
                 <button type="button" class="btn btn-dark" th:id="${item.getProduct().getPro_id}" th:onclick="Delete(this.getAttribute('id'))">삭제</button>
 <!--                </a>-->
             </div>

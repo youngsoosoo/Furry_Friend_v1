@@ -4,7 +4,6 @@ import com.ff.furry_friend.entity.basket;
 import com.ff.furry_friend.entity.product;
 import com.ff.furry_friend.entity.user;
 import com.ff.furry_friend.repository.BasketRepository;
-import com.ff.furry_friend.service.BasketService;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;

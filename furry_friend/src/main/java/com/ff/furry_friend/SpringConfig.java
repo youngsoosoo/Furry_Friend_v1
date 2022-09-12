@@ -4,6 +4,7 @@ import com.ff.furry_friend.repository.*;
 import com.ff.furry_friend.service.BasketService;
 import com.ff.furry_friend.service.ProductService;
 import com.ff.furry_friend.service.UserService;
+import com.ff.furry_friend.service.repository.*;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 

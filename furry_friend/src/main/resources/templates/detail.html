@@ -55,7 +55,6 @@ function shopping_basket(name){
                     <h5 class="card-text" th:text="${item.getPro_price()}"></h5>
                     <h5 class="card-text" th:text="${item.getPro_view()}"></h5>
                 </div>
-                <input type="number" name="number" min="1" max="9" default="1">
                 <button type="button" class="btn btn-dark" th:id="${item.getPro_name()}" th:onclick="purchase(this.getAttribute('id'))">구매</button>
 
                 <button type="button" class="btn btn-light" th:id="${item.getPro_name()}" th:onclick="shopping_basket(this.getAttribute('id'))">장바구니</button>

@@ -1,10 +1,8 @@
 package com.ff.furry_friend.repository;
 
 import com.ff.furry_friend.entity.user;
-import org.hibernate.Transaction;
 
 import javax.persistence.EntityManager;
-import javax.persistence.EntityTransaction;
 
 import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
