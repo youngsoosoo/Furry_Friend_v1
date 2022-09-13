@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.*;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.util.Map;
+import java.util.Optional;
 
 @Controller
 @AllArgsConstructor
@@ -80,6 +81,18 @@ public class UserController {
         model.addAttribute("access_token", access_token);
         model.addAttribute("userInfo", userInfo);
         System.out.println(userInfo.get("id").toString() + userInfo.get("nickname") + userInfo.get("email").toString());
+
+        user user = new user();
+        user.setId(userInfo.get("id").toString());
+        user.setName(userInfo.get("nickname").toString());
+
+        int result = userService.create(user);
+        if(result == 0){
+            session.setAttribute("id", user.getId());
+            System.out.println(user.getId());
+        }else{
+            //수정 필요
+        }
 
         //ci는 비즈니스 전환후 검수신청 -> 허락받아야 수집 가능
         return "user/logininformation";

@@ -20,4 +20,6 @@ public interface UserRepository {
     int findid(String id);
 
     int findCreate_id(String id);
+
+    int Create_id(int id);
 }

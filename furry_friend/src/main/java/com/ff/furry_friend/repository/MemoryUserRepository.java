@@ -69,4 +69,12 @@ public class MemoryUserRepository implements UserRepository {
                 .getResultList();
         return result.get(0).getCreate_id();
     }
+
+    @Override
+    public int Create_id(int id){
+        List<user> result = em.createQuery("select m from user m where m.create_id = :id", user.class)
+                .setParameter("id", id)
+                .getResultList();
+        return result.get(0).getCreate_id();
+    }
 }

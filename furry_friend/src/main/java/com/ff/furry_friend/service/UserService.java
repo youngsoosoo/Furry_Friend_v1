@@ -25,10 +25,13 @@ public class UserService {
      * 회원가입
      */
     public int create(user user) {
-        System.out.println(user);
-        validateDuplicateMember(user); //중복 회원 검증
-        userRepository.save(user);
-        return user.getCreate_id();
+        Optional<user> result = userRepository.findById(user.getId());
+        if(result.get().getId() != null){
+            return 0;   //카카오 회원 존재시
+        }else{
+            userRepository.save(user);
+            return 1;   //카카오 회원 존재 x
+        }
     }
 
     public boolean Login(UserForm form) {
@@ -86,5 +89,9 @@ public class UserService {
 
     public int findCreate_id(String id){
         return userRepository.findCreate_id(id);
+    }
+
+    public int Create_id(int id){
+        return userRepository.Create_id(id);
     }
 }

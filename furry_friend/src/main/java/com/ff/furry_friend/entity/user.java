@@ -20,13 +20,13 @@ public class user {
     private int create_id;
     @Column(nullable = false)
     private String id;
-    @Column(nullable = false)
+    @Column
     private String pw;
-    @Column(nullable = false)
+    @Column
     private String address;
     @Column(nullable = false)
     private String name;
-    @Column(nullable = false)
+    @Column
     private String phone;
     @Column(nullable = false)
     private int save_money;
