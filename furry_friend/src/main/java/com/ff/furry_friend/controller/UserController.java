@@ -9,22 +9,15 @@ import com.ff.furry_friend.service.UserService;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpSession;
-import java.io.IOException;
-import java.util.Map;
-import java.util.Optional;
 
 @Controller
 @AllArgsConstructor
 public class UserController {
     @Autowired
     private final UserService userService;
-
-    @Autowired
-    private final KakaoAPI kakaoAPI;
 
     @Autowired
     private final CertifiedService certifiedService;
@@ -48,7 +41,6 @@ public class UserController {
         user.setPhone(form.getPhone());
 
         userService.create(user);
-
         return "user/login";
     }
 
@@ -68,34 +60,6 @@ public class UserController {
             session.setAttribute("id", form.getId());
             return "redirect:/all";
         }
-    }
-
-
-    @GetMapping("/user/kakao")
-    public String getCI(@RequestParam String code, Model model, HttpSession session) throws IOException {
-        System.out.println("code = " + code);
-        String access_token = kakaoAPI.getToken(code);
-        Map<String, Object> userInfo = kakaoAPI.getUserInfo(access_token);
-        session.setAttribute("access_token", access_token);
-        model.addAttribute("code", code);
-        model.addAttribute("access_token", access_token);
-        model.addAttribute("userInfo", userInfo);
-        System.out.println(userInfo.get("id").toString() + userInfo.get("nickname") + userInfo.get("email").toString());
-
-        user user = new user();
-        user.setId(userInfo.get("id").toString());
-        user.setName(userInfo.get("nickname").toString());
-
-        int result = userService.create(user);
-        if(result == 0){
-            session.setAttribute("id", user.getId());
-            System.out.println(user.getId());
-        }else{
-            //수정 필요
-        }
-
-        //ci는 비즈니스 전환후 검수신청 -> 허락받아야 수집 가능
-        return "user/logininformation";
     }
 
     @RequestMapping(value="/logout")

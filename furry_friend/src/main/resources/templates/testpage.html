@@ -1,23 +1,25 @@
-<!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<!doctype html>
+<html lang="ko">
 <head>
-    <meta charset="UTF-8">
-    <title>Title</title>
+  <meta charset="utf-8">
+  <title>네이버 로그인</title>
+  <script type="text/javascript" src="https://static.nid.naver.com/js/naverLogin_implicit-1.0.3.js" charset="utf-8"></script>
+  <script type="text/javascript" src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
 </head>
 <body>
-<div class="form-group phoneCertifyDiv">
-  <label class="inputTitle">휴대폰 번호</label><br>
-  <div class="phoneNum-formgroup">
-    <input th:if="${phone != null}" type="text" name="phone" class="phoneNum" readonly th:value="${phone}">
-    <input th:unless="${phone != null}" type="text" name="phone" class="phoneNum" >
-    <input type="button" id="phoneCheck" class="btn memberPhoneBtn active" value="인증번호 전송">
-  </div>
-  <div class="phoneNum-formgroup" id="phoneCertifyDiv">
-    <input type="text" name="phoneCertify" class="phoneNum">
-    <input type="button" id="certifyCheck" class="btn phoneBtn" value="인증하기">
-  </div>
-</div>
-<script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
-<script src="/js/certified.js"></script>
+<!-- 네이버 로그인 버튼 노출 영역 -->
+<div id="naver_id_login"></div>
+<!-- //네이버 로그인 버튼 노출 영역 -->
+<script type="text/javascript">
+  var naver_id_login = new naver_id_login("YOUR_CLIENT_ID", "YOUR_CALLBACK_URL");
+  var state = naver_id_login.getUniqState();
+  naver_id_login.setButton("white", 2,40);
+  naver_id_login.setDomain("YOUR_SERVICE_URL");
+  naver_id_login.setState(state);
+  naver_id_login.setPopup();
+  naver_id_login.init_naver_id_login();
+</script>
+
 </body>
 </html>
+
