@@ -1,25 +1,28 @@
-<!doctype html>
-<html lang="ko">
+<!DOCTYPE html>
+<html xmlns:th="https://www.thymeleaf.org">
 <head>
-  <meta charset="utf-8">
-  <title>네이버 로그인</title>
-  <script type="text/javascript" src="https://static.nid.naver.com/js/naverLogin_implicit-1.0.3.js" charset="utf-8"></script>
-  <script type="text/javascript" src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
+  <meta charset="UTF-8">
+  <title>네이버 아이디로 로그인</title>
+  <style>
+    pre{
+      overflow: scroll;
+    }
+  </style>
 </head>
 <body>
-<!-- 네이버 로그인 버튼 노출 영역 -->
-<div id="naver_id_login"></div>
-<!-- //네이버 로그인 버튼 노출 영역 -->
-<script type="text/javascript">
-  var naver_id_login = new naver_id_login("YOUR_CLIENT_ID", "YOUR_CALLBACK_URL");
-  var state = naver_id_login.getUniqState();
-  naver_id_login.setButton("white", 2,40);
-  naver_id_login.setDomain("YOUR_SERVICE_URL");
-  naver_id_login.setState(state);
-  naver_id_login.setPopup();
-  naver_id_login.init_naver_id_login();
-</script>
+<div th:if="${session.currentUser eq null}">
+  <h3>네이버 로그인</h3>
+  <a th:href="${apiURL}"><img height="50" src="http://static.nid.naver.com/oauth/small_g_in.PNG"/></a>
+</div>
+
+<div th:if="${session.currentUser ne null}">
+  <h3>이 부분은 로그인한 사용자한테만 보임</h3>
+  <pre th:text="${session.currentUser}"></pre>
+  <a th:href="${'/naver/getProfile?accessToken=' + session.currentAT}">Get User's Profile</a>
+  <a th:href="${'/naver/refreshToken?refreshToken=' + session.currentRT}">Refresh Token</a>
+  <a th:href="${'/naver/deleteToken?accessToken=' + session.currentAT}">Delete Token</a>
+  <a href="/naver/invalidate">로그아웃 (Invalidate Session)</a>
+</div>
 
 </body>
 </html>
-

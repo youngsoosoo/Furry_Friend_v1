@@ -1,5 +1,6 @@
 package com.ff.furry_friend.dto.slogin;
 
+import com.ff.furry_friend.entity.user;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -19,13 +20,10 @@ public class OAuthAttributes {
     private String username;
     private String mobile;
     private String email;
-    private Role role;
+
     public static OAuthAttributes of(String registrationId, String userNameAttributeName, Map<String, Object> attributes) {
         /* 구글인지 네이버인지 카카오인지 구분하기 위한 메소드 (ofNaver, ofKaKao) */
-        if ("naver".equals(registrationId)) {
-            return ofNaver("id", attributes);
-        }
-        return ofGoogle(userNameAttributeName, attributes);
+        return ofNaver("id", attributes);
     }     // ofGoogle 생략
     private static OAuthAttributes ofNaver(String userNameAttributeName, Map<String, Object> attributes) {
         /* JSON형태이기 때문에 Map을 통해 데이터를 가져온다. */
@@ -39,12 +37,11 @@ public class OAuthAttributes {
                 .nameAttributeKey(userNameAttributeName)
                 .build();
     }
-    public User toEntity() {
-        return User.builder()
-                .username(username)
-                .email(email)
-                .mobile(mobile)
-                .role(Role.SOCIAL)
+    public user toEntity() {
+        return user.builder()
+                .name(username)
+                .id(email)
+                .phone(mobile)
                 .build();
     }
 }

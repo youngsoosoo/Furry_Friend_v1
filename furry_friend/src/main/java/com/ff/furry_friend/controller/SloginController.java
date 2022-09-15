@@ -10,7 +10,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.util.Map;
@@ -46,6 +45,27 @@ public class SloginController {
         //ci는 비즈니스 전환후 검수신청 -> 허락받아야 수집 가능
         return "user/logininformation";
     }
+
+    @RequestMapping(value="/logout")
+    public String logout(HttpSession session) {
+        System.out.println("3");
+        String access_Token = (String)session.getAttribute("access_Token");
+
+        if(access_Token != null && !"".equals(access_Token)){
+            System.out.println("1");
+            kakaoAPI.kakaoLogout(access_Token);
+            session.removeAttribute("access_Token");
+            //session.removeAttribute("id");
+        }else{
+            System.out.println("2");
+            System.out.println("access_Token is null");
+            //return "redirect:/";
+        }
+        //return "index";
+        return "redirect:/user/login";
+    }
+
+    //테스트중
 
 
 }
