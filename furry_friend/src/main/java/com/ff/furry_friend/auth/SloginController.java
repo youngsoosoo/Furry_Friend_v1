@@ -1,20 +1,19 @@
 package com.ff.furry_friend.auth;
 
-import com.ff.furry_friend.dto.Role;
-import com.ff.furry_friend.dto.User;
+import com.ff.furry_friend.entity.Role;
 import com.ff.furry_friend.entity.user;
+import com.ff.furry_friend.repository.UserRepository;
 import com.ff.furry_friend.service.KakaoAPI;
 import com.ff.furry_friend.service.UserService;
 import lombok.AllArgsConstructor;
-import org.apache.maven.artifact.repository.Authentication;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.oauth2.core.user.OAuth2User;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
-import javax.servlet.http.HttpSession;
-import java.io.IOException;
 import java.util.Map;
 
 @Controller
@@ -26,47 +25,47 @@ public class SloginController {
     @Autowired
     private final KakaoAPI kakaoAPI;
 
-    @GetMapping("/user/kakao")
-    public String getCI(@RequestParam String code, Model model, HttpSession session) throws IOException {
-        System.out.println("code = " + code);
-        String access_token = kakaoAPI.getToken(code);
-        Map<String, Object> userInfo = kakaoAPI.getUserInfo(access_token);
-        session.setAttribute("access_token", access_token);
-        model.addAttribute("code", code);
-        model.addAttribute("access_token", access_token);
-        model.addAttribute("userInfo", userInfo);
-        System.out.println(userInfo.get("id").toString() + userInfo.get("nickname") + userInfo.get("email").toString());
-
-        user user = new user();
-        user.setId(userInfo.get("id").toString());
-        user.setName(userInfo.get("nickname").toString());
-
-        userService.create(user);
-        session.setAttribute("id", user.getId());
-        System.out.println(user.getId());
-        //카카오 회원이 있든 없든 세션 및 로그인 성공(없으면 자동 회원가입)
-        //ci는 비즈니스 전환후 검수신청 -> 허락받아야 수집 가능
-        return "user/logininformation";
-    }
-
-    @RequestMapping(value="/logout")
-    public String logout(HttpSession session) {
-        System.out.println("3");
-        String access_Token = (String)session.getAttribute("access_Token");
-
-        if(access_Token != null && !"".equals(access_Token)){
-            System.out.println("1");
-            kakaoAPI.kakaoLogout(access_Token);
-            session.removeAttribute("access_Token");
-            //session.removeAttribute("id");
-        }else{
-            System.out.println("2");
-            System.out.println("access_Token is null");
-            //return "redirect:/";
-        }
-        //return "index";
-        return "redirect:/user/login";
-    }
+//    @GetMapping("/user/kakao")
+//    public String getCI(@RequestParam String code, Model model, HttpSession session) throws IOException {
+//        System.out.println("code = " + code);
+//        String access_token = kakaoAPI.getToken(code);
+//        Map<String, Object> userInfo = kakaoAPI.getUserInfo(access_token);
+//        session.setAttribute("access_token", access_token);
+//        model.addAttribute("code", code);
+//        model.addAttribute("access_token", access_token);
+//        model.addAttribute("userInfo", userInfo);
+//        System.out.println(userInfo.get("id").toString() + userInfo.get("nickname") + userInfo.get("email").toString());
+//
+//        user user = new user();
+//        user.setId(userInfo.get("id").toString());
+//        user.setName(userInfo.get("nickname").toString());
+//
+//        userService.create(user);
+//        session.setAttribute("id", user.getId());
+//        System.out.println(user.getId());
+//        //카카오 회원이 있든 없든 세션 및 로그인 성공(없으면 자동 회원가입)
+//        //ci는 비즈니스 전환후 검수신청 -> 허락받아야 수집 가능
+//        return "user/logininformation";
+//    }
+//
+//    @RequestMapping(value="/logout")
+//    public String logout(HttpSession session) {
+//        System.out.println("3");
+//        String access_Token = (String)session.getAttribute("access_Token");
+//
+//        if(access_Token != null && !"".equals(access_Token)){
+//            System.out.println("1");
+//            kakaoAPI.kakaoLogout(access_Token);
+//            session.removeAttribute("access_Token");
+//            //session.removeAttribute("id");
+//        }else{
+//            System.out.println("2");
+//            System.out.println("access_Token is null");
+//            //return "redirect:/";
+//        }
+//        //return "index";
+//        return "redirect:/user/login";
+//    }
 
     //테스트중
 
@@ -84,11 +83,11 @@ public class SloginController {
     }
 
     @PostMapping("/join")
-    public String join(@ModelAttribute User user){
+    public String join(@ModelAttribute user user){
         user.setRole(Role.ROLE_USER);
 
-        String encodePwd = bCryptPasswordEncoder.encode(user.getPassword());
-        user.setPassword(encodePwd);
+        String encodePwd = bCryptPasswordEncoder.encode(user.getPw());
+        user.setPw(encodePwd);
 
         userRepository.save(user);  //반드시 패스워드 암호화해야함
         return "redirect:/loginForm";
@@ -120,11 +119,11 @@ public class SloginController {
     public String formLoginInfo(Authentication authentication, @AuthenticationPrincipal PrincipalDetails principalDetails){
 
         PrincipalDetails principal = (PrincipalDetails) authentication.getPrincipal();
-        User user = principal.getUser();
+        user user = principal.getUser();
         System.out.println(user);
         //User(id=2, username=11, password=$2a$10$m/1Alpm180jjsBpYReeml.AzvGlx/Djg4Z9/JDZYz8TJF1qUKd1fW, email=11@11, role=ROLE_USER, createTime=2022-01-30 19:07:43.213, provider=null, providerId=null)
 
-        User user1 = principalDetails.getUser();
+        user user1 = principalDetails.getUser();
         System.out.println(user1);
         //User(id=2, username=11, password=$2a$10$m/1Alpm180jjsBpYReeml.AzvGlx/Djg4Z9/JDZYz8TJF1qUKd1fW, email=11@11, role=ROLE_USER, createTime=2022-01-30 19:07:43.213, provider=null, providerId=null)
         //user == user1

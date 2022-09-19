@@ -1,22 +1,27 @@
 package com.ff.furry_friend.auth;
 
+import com.ff.furry_friend.auth.userinfo.OAuth2Userinfo;
+import com.ff.furry_friend.entity.user;
 import lombok.Getter;
 import lombok.ToString;
+import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.oauth2.core.user.OAuth2User;
 
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Map;
 
 @Getter
 @ToString
 public class PrincipalDetails implements UserDetails, OAuth2User {
 
-    private User user;
+    private user user;
     //private Map<String, Object> attributes;
-    private OAuth2UserInfo oAuth2UserInfo;
+    private OAuth2Userinfo oAuth2Userinfo;
 
     //UserDetails : Form 로그인 시 사용
-    public PrincipalDetails(User user) {
+    public PrincipalDetails(com.ff.furry_friend.entity.user user) {
         this.user = user;
     }
 
@@ -27,9 +32,9 @@ public class PrincipalDetails implements UserDetails, OAuth2User {
     //    this.attributes = attributes;
     //}
 
-    public PrincipalDetails(User user, OAuth2UserInfo oAuth2UserInfo) {
+    public PrincipalDetails(user user, OAuth2Userinfo oAuth2Userinfo) {
         this.user = user;
-        this.oAuth2UserInfo = oAuth2UserInfo;
+        this.oAuth2Userinfo = oAuth2Userinfo;
     }
 
 
@@ -56,7 +61,7 @@ public class PrincipalDetails implements UserDetails, OAuth2User {
      */
     @Override
     public String getPassword() {
-        return user.getPassword();
+        return user.getPw();
     }
 
     /**
@@ -65,7 +70,7 @@ public class PrincipalDetails implements UserDetails, OAuth2User {
      */
     @Override
     public String getUsername() {
-        return user.getUsername();
+        return user.getId();
     }
 
     /**
@@ -120,7 +125,7 @@ public class PrincipalDetails implements UserDetails, OAuth2User {
     @Override
     public Map<String, Object> getAttributes() {
         //return attributes;
-        return oAuth2UserInfo.getAttributes();
+        return oAuth2Userinfo.getAttributes();
     }
 
     /**
@@ -131,6 +136,6 @@ public class PrincipalDetails implements UserDetails, OAuth2User {
     public String getName() {
         //String sub = attributes.get("sub").toString();
         //return sub;
-        return oAuth2UserInfo.getProviderId();
+        return oAuth2Userinfo.getProviderId();
     }
 }

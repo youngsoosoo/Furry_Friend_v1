@@ -17,13 +17,9 @@ public class MemoryUserRepository implements UserRepository {
     }
 
     private static int sequence = 0;
-    Timestamp timestamp = new Timestamp(System.currentTimeMillis());
-    SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
 
     @Override
     public user save(user user) {
-        user.setCreate_id(sequence++);
-        user.setCreate_time(sdf.format(timestamp));
         em.persist(user);
         return user;
     }
@@ -76,5 +72,12 @@ public class MemoryUserRepository implements UserRepository {
                 .setParameter("id", id)
                 .getResultList();
         return result.get(0).getCreate_id();
+    }
+
+    @Override
+    public user findByUserid(String id){
+        user user = (com.ff.furry_friend.entity.user) em.createQuery("select m from user m where m.id = :id", user.class)
+                .setParameter("id", id);
+        return user;
     }
 }

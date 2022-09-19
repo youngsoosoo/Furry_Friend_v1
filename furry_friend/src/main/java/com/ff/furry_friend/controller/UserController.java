@@ -1,13 +1,17 @@
 package com.ff.furry_friend.controller;
 
+import com.ff.furry_friend.auth.PrincipalDetails;
 import com.ff.furry_friend.dto.UserForm;
+import com.ff.furry_friend.entity.Role;
 import com.ff.furry_friend.entity.user;
 import com.ff.furry_friend.service.CertifiedService;
-import com.ff.furry_friend.service.KakaoAPI;
 import com.ff.furry_friend.service.TestService;
 import com.ff.furry_friend.service.UserService;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
@@ -19,6 +23,7 @@ public class UserController {
     @Autowired
     private final UserService userService;
 
+    @Autowired private BCryptPasswordEncoder bCryptPasswordEncoder;
     @Autowired
     private final CertifiedService certifiedService;
 
@@ -32,13 +37,11 @@ public class UserController {
 
 
     @PostMapping(value = "/user/create")
-    public String create(UserForm form) {
-        user user = new user();
-        user.setId(form.getId());
-        user.setPw(form.getPw());
-        user.setAddress(form.getAddress());
-        user.setName(form.getName());
-        user.setPhone(form.getPhone());
+    public String create(@ModelAttribute user user) {
+        user.setRole(Role.ROLE_USER);
+
+        String encodePwd = bCryptPasswordEncoder.encode(user.getPw());
+        user.setPw(encodePwd);
 
         userService.create(user);
         return "user/login";
@@ -85,5 +88,6 @@ public class UserController {
     public String test(){
         return "testpage";
     }
+
 
 }

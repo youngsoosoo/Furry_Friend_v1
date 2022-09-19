@@ -22,4 +22,6 @@ public interface UserRepository {
     int findCreate_id(String id);
 
     int Create_id(int id);
+
+    user findByUserid(String id);
 }

@@ -8,7 +8,6 @@ import java.util.Map;
 @AllArgsConstructor
 public class NaverUserinfo implements OAuth2Userinfo {
     private Map<String, Object> attributes; //OAuth2User.getAttributes();
-    private Map<String, Object> attributesResponse;
 
     @Override
     public Map<String, Object> getAttributes() {
@@ -17,7 +16,7 @@ public class NaverUserinfo implements OAuth2Userinfo {
 
     @Override
     public String getProviderId() {
-        return attributesResponse.get("id").toString();
+        return attributes.get("id").toString();
     }
 
     @Override
@@ -27,11 +26,11 @@ public class NaverUserinfo implements OAuth2Userinfo {
 
     @Override
     public String getEmail() {
-        return attributesResponse.get("email").toString();
+        return attributes.get("email").toString();
     }
 
     @Override
     public String getName() {
-        return attributesResponse.get("name").toString();
+        return attributes.get("name").toString();
     }
 }
