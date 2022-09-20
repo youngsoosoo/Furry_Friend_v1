@@ -62,7 +62,7 @@ public class KakaopayController {   //카카오 페이 결제 컨트롤러
         Optional<basket> ba = basketRepository.findByName(name);
         Optional<user> user = userRepository.findById((String)session.getAttribute("id"));
         /*장바구니에 담겨있던 상품이라면 제거와 결제 아니라면 그냥 결제, 파라미터로 이름과 id를 받아야함*/
-        if(ba.get().getProduct().getPro_name().equals(name) && ba.get().getUser().getId().equals((String)session.getAttribute("id"))){
+        if(ba.isPresent() && ba.get().getProduct().getPro_name().equals(name) && ba.get().getUser().getId().equals(session.getAttribute("id"))){
             KakaoPayApprovalVO li = kakaopay.kakaoPayInfo(pg_token, pro, (String)session.getAttribute("id"));
             basketService.DeleteBasket(ba.get().getProduct().getPro_id(), user.get().getCreate_id());
             model.addAttribute("info", li);

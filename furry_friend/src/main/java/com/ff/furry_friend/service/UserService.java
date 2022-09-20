@@ -25,13 +25,8 @@ public class UserService {
      * 회원가입
      */
     public int create(user user) {
-        Optional<user> result = userRepository.findById(user.getId());
-        if(result.get().getId() != null){
-            return 0;   //카카오 회원 존재시
-        }else{
-            userRepository.save(user);
-            return 1;   //카카오 회원 존재 x
-        }
+        userRepository.save(user);
+        return user.getCreate_id();
     }
 
     public boolean Login(UserForm form) {

@@ -34,14 +34,11 @@ dependencies {
 	implementation group: 'com.fasterxml.jackson.core', name: 'jackson-core', version: '2.12.3'
 	implementation group: 'com.fasterxml.jackson.core', name: 'jackson-annotations', version: '2.12.3'
 
-	//네이버
-	implementation 'org.springframework.boot:spring-boot-starter-security'
-	implementation 'org.thymeleaf.extras:thymeleaf-extras-springsecurity5'
-	//구글
-	implementation 'org.springframework.boot:spring-boot-starter-oauth2-client:2.6.2'
-
 	//휴대폰 인증
 	compileOnly group: 'net.nurigo', name: 'javaSDK', version: '2.2'
+
+	//sns로그인
+	compileOnly 'org.springframework.boot:spring-boot-starter-oauth2-client'
 
 	compileOnly 'org.projectlombok:lombok'
 	runtimeOnly 'mysql:mysql-connector-java'

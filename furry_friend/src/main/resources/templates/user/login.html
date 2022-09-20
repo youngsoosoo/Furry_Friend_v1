@@ -17,7 +17,15 @@
         </form>
 
         <a href="https://kauth.kakao.com/oauth/authorize?client_id=8a03e9ddcf15f3e1a7a1da99b7963cf4&redirect_uri=http://localhost:8080/user/kakao&response_type=code">
-            <img src="/img/kakao_login_medium_wide.png" id="img" alt="카카오 로그인">
+            <img src="/img/kakao_login_medium_wide.png" id="kakaoimg" alt="카카오 로그인">
+        </a>
+        <br/>
+        <a href="/oauth2/authorization/google" class="btn btn-success active" role="button">
+            <img src="/img/btn_google_signin_light_normal_web@2x.png" id="googleimg" alt="구글 로그인">
+        </a>
+        <br/>
+        <a href="/oauth2/authorization/naver" class="btn btn-secondary active" role="button">
+            <img src="/img/btnG.png" id="naverimg" alt="네이버 로그인">
         </a>
     </span>
     <span th:if="${id!=null}">

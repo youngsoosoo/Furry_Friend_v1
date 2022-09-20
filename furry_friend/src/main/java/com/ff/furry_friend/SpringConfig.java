@@ -11,7 +11,7 @@ import javax.persistence.EntityManager;
 import javax.sql.DataSource;
 
 @Configuration
-public class SpringConfig {
+public class SpringConfig{
     private final DataSource dataSource;
     private final EntityManager em;
 
@@ -47,4 +47,5 @@ public class SpringConfig {
     public UserRepository userRepository(){
         return new MemoryUserRepository(em);
     }
+
 }

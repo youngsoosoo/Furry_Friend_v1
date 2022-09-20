@@ -1,8 +1,6 @@
 package com.ff.furry_friend.controller;
 
-import com.ff.furry_friend.entity.basket;
 import com.ff.furry_friend.entity.product;
-import com.ff.furry_friend.entity.user;
 import com.ff.furry_friend.service.BasketService;
 import com.ff.furry_friend.service.ProductService;
 import com.ff.furry_friend.service.UserService;
@@ -14,9 +12,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import javax.servlet.http.HttpSession;
 import java.util.List;
-import java.util.Optional;
 
 @Controller
 @AllArgsConstructor

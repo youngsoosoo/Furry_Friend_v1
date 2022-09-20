@@ -1,6 +1,7 @@
 package com.ff.furry_friend.repository;
 
 import com.ff.furry_friend.entity.user;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.EntityManager;
 
@@ -9,6 +10,7 @@ import java.text.SimpleDateFormat;
 import java.util.List;
 import java.util.Optional;
 
+@Transactional
 public class MemoryUserRepository implements UserRepository {
     private final EntityManager em;
 
@@ -17,9 +19,13 @@ public class MemoryUserRepository implements UserRepository {
     }
 
     private static int sequence = 0;
+    Timestamp timestamp = new Timestamp(System.currentTimeMillis());
+    SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
 
     @Override
     public user save(user user) {
+        user.setCreate_id(sequence++);
+        user.setCreate_time(sdf.format(timestamp));
         em.persist(user);
         return user;
     }
