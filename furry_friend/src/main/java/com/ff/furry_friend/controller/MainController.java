@@ -27,7 +27,7 @@ public class MainController {
     private final UserService userService;
 
 
-    @GetMapping("all")  //메인페이지로 만들어야함!!!
+    @GetMapping("")  //메인페이지로 만들어야함!!!
     public String category(Model model){
         List<product> li = productService.findAll();
         model.addAttribute("li", li);

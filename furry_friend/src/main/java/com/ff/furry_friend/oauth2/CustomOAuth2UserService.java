@@ -14,7 +14,6 @@ import org.springframework.stereotype.Service;
 
 import javax.servlet.http.HttpSession;
 import java.util.Collections;
-import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
@@ -48,6 +47,10 @@ public class CustomOAuth2UserService implements OAuth2UserService<OAuth2UserRequ
                 .map(entity -> entity.update(attributes.getName()))
                 .orElse(attributes.toEntity());
 
-        return userRepository.save(user);
+        if(user.getId().equals(attributes.getEmail())){
+            return user;
+        }else{
+            return userRepository.save(user);   //spring data jpa를 만들면 좋을 거 같음
+        }
     }
 }
