@@ -1,6 +1,7 @@
 package com.ff.furry_friend.controller;
 
 import com.ff.furry_friend.entity.product;
+import com.ff.furry_friend.oauth2.SessionUser;
 import com.ff.furry_friend.service.BasketService;
 import com.ff.furry_friend.service.ProductService;
 import com.ff.furry_friend.service.UserService;
@@ -12,6 +13,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import javax.servlet.http.HttpSession;
 import java.util.List;
 
 @Controller
@@ -26,11 +28,19 @@ public class MainController {
     @Autowired
     private final UserService userService;
 
+    @Autowired
+    private final HttpSession httpSession;
 
     @GetMapping("")  //메인페이지로 만들어야함!!!
     public String category(Model model){
         List<product> li = productService.findAll();
         model.addAttribute("li", li);
+
+        SessionUser user = (SessionUser) httpSession.getAttribute("user");
+
+        if(user != null){
+            model.addAttribute("userName", user.getName());
+        }
 
         return "category";
     }

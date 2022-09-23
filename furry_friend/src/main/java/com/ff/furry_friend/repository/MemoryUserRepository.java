@@ -82,8 +82,11 @@ public class MemoryUserRepository implements UserRepository {
 
     @Override
     public user findByUserid(String id){
-        user user = (com.ff.furry_friend.entity.user) em.createQuery("select m from user m where m.id = :id", user.class)
-                .setParameter("id", id);
+        List<user> li = em.createQuery("select m from user m where m.id = :id", user.class)
+                .setParameter("id", id).getResultList();
+        user user= new user();
+        user.setName(li.get(0).getName());
+        user.setId(li.get(0).getId());
         return user;
     }
 }

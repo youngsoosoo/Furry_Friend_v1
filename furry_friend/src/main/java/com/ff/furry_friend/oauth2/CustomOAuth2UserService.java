@@ -46,11 +46,6 @@ public class CustomOAuth2UserService implements OAuth2UserService<OAuth2UserRequ
         user user = userRepository.findById(attributes.getEmail())
                 .map(entity -> entity.update(attributes.getName()))
                 .orElse(attributes.toEntity());
-
-        if(user.getId().equals(attributes.getEmail())){
-            return user;
-        }else{
-            return userRepository.save(user);   //spring data jpa를 만들면 좋을 거 같음
-        }
+        return userRepository.save(user);
     }
 }
