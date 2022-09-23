@@ -39,7 +39,8 @@ public class MainController {
         SessionUser user = (SessionUser) httpSession.getAttribute("user");
 
         if(user != null){
-            model.addAttribute("userName", user.getName());
+            System.out.println(user.getEmail());
+            model.addAttribute("id", user.getEmail());
         }
 
         return "category";

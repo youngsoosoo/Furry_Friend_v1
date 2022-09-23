@@ -3,7 +3,6 @@ package com.ff.furry_friend.service;
 import com.ff.furry_friend.dto.UserForm;
 import com.ff.furry_friend.entity.user;
 import com.ff.furry_friend.repository.UserRepository;
-import com.ff.furry_friend.repository.service.UserService;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;

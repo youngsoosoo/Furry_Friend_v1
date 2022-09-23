@@ -34,7 +34,7 @@ public class CustomOAuth2UserService implements OAuth2UserService<OAuth2UserRequ
         // OAuth2UserService
         OAuthAttributes attributes = OAuthAttributes.of(registrationId, userNameAttributeName, oAuth2User.getAttributes());
         user user = saveOrUpdate(attributes);
-        httpSession.setAttribute("user", new SessionUser(user)); // SessionUser (직렬화된 dto 클래스 사용)
+        httpSession.setAttribute("id", user.getId()); // SessionUser (직렬화된 dto 클래스 사용)
 
         return new DefaultOAuth2User(Collections.singleton(new SimpleGrantedAuthority(user.getRoleKey())),
                 attributes.getAttributes(),
@@ -46,6 +46,11 @@ public class CustomOAuth2UserService implements OAuth2UserService<OAuth2UserRequ
         user user = userRepository.findById(attributes.getEmail())
                 .map(entity -> entity.update(attributes.getName()))
                 .orElse(attributes.toEntity());
-        return userRepository.save(user);
+
+        if(userRepository.findById(attributes.getEmail()).isEmpty()){
+            return userRepository.save(user);
+        }else{
+            return user;
+        }
     }
 }
