@@ -78,10 +78,5 @@ public class UserController {
         return Integer.toString(randomNumber);
     }
 
-    @GetMapping("/test")
-    public String test(){
-        return "testpage";
-    }
-
 
 }
