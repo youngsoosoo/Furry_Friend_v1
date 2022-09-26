@@ -1,8 +1,10 @@
 package com.ff.furry_friend.controller;
 
+import com.ff.furry_friend.entity.comment;
 import com.ff.furry_friend.entity.product;
 import com.ff.furry_friend.oauth2.SessionUser;
 import com.ff.furry_friend.service.BasketService;
+import com.ff.furry_friend.service.CommentService;
 import com.ff.furry_friend.service.ProductService;
 import com.ff.furry_friend.service.UserService;
 import lombok.AllArgsConstructor;
@@ -15,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.servlet.http.HttpSession;
 import java.util.List;
+import java.util.Optional;
 
 @Controller
 @AllArgsConstructor
@@ -23,10 +26,7 @@ public class MainController {
     private final ProductService productService;
 
     @Autowired
-    private final BasketService basketService;
-
-    @Autowired
-    private final UserService userService;
+    private final CommentService commentService;
 
     @Autowired
     private final HttpSession httpSession;
@@ -71,6 +71,9 @@ public class MainController {
     public String pet(@RequestParam(value = "name") String name, Model model){
         List<product> li = productService.findName(name);
         model.addAttribute("li", li);
+
+        Optional<comment> comment = commentService.findComment(name);
+        model.addAttribute("comment", comment);
         return "detail";
     }
 

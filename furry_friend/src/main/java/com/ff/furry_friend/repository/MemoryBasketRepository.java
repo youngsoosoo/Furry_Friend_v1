@@ -46,7 +46,7 @@ public class MemoryBasketRepository implements BasketRepository{
         pro.setPro_id(pro_id);
         basket ba = new basket();
         ba.setProduct(pro);
-        //수정 필요
+
         Query query = em.createQuery("delete from basket b where b.user.create_id = :id and b.product.pro_id = :pro_id")
                 .setParameter("id", id)
                 .setParameter("pro_id", pro_id);

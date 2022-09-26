@@ -51,6 +51,9 @@ public class product {
     @OneToMany(mappedBy = "product", cascade = CascadeType.ALL)
     private List<basket> baskets = new ArrayList<>();
 
+    @OneToMany(mappedBy = "product", cascade = CascadeType.ALL)
+    private List<comment> comments = new ArrayList<>();
+
     //?
 //    @Builder.Default
 //    @OneToMany(fetch = FetchType.LAZY, mappedBy = "product", cascade = CascadeType.ALL)
