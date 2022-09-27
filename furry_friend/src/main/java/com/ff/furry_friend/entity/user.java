@@ -31,6 +31,9 @@ public class user {
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
     private List<basket> users = new ArrayList<>();
 
+    @OneToMany(mappedBy = "user_comment", cascade = CascadeType.ALL)
+    private List<comment> user_comment = new ArrayList<>();
+
     @Enumerated(EnumType.STRING)
     private Role role;
 

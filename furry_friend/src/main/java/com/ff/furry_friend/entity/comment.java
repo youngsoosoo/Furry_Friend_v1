@@ -21,9 +21,11 @@ public class comment {
 
     private String content;
 
-    private String writer;
-
     private String img;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "user_id")
+    private user user;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "pro_id")

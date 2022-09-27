@@ -32,18 +32,17 @@ public class MemoryCommentRepository implements CommentRepository{
     }
 
     @Override
-    public void updatecomment(comment comment) {    //수정 필요!!!!
-        em.createQuery("update comment b set b.content = :content, b.img = :img where b.product.pro_id = :pro_id")
+    public void update(comment comment) {// 댓글 아이디가 일치할 때 가능한 sql 문, 작성자가 같을 때 수정 삭제 버튼이 나오게 할 예정이라 아이디는 달라도 됌
+        em.createQuery("update comment b set b.content = :content, b.img = :img where b.commentid = :commentid")
                 .setParameter("content", comment.getContent())
                 .setParameter("img", comment.getImg())
-                .setParameter("pro_id", comment.getProduct().getPro_id());
+                .setParameter("commentid", comment.getCommentid());
     }
 
     @Override
-    public void deletecomment(int id, int pro_id) {
-        Query query = em.createQuery("delete from comment b where b.commentid = :id and b.product.pro_id = :pro_id")
-                .setParameter("id", id)
-                .setParameter("pro_id", pro_id);
+    public void delete(comment comment) {
+        Query query = em.createQuery("delete from comment b where b.commentid = :id")
+                .setParameter("id", comment.getCommentid());
         query.executeUpdate();
     }
 }

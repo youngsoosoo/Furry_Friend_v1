@@ -2,6 +2,7 @@ package com.ff.furry_friend.controller;
 
 import com.ff.furry_friend.entity.comment;
 import com.ff.furry_friend.entity.product;
+import com.ff.furry_friend.entity.user;
 import com.ff.furry_friend.oauth2.SessionUser;
 import com.ff.furry_friend.service.BasketService;
 import com.ff.furry_friend.service.CommentService;
@@ -27,6 +28,9 @@ public class MainController {
 
     @Autowired
     private final CommentService commentService;
+
+    @Autowired
+    private final UserService userService;
 
     @Autowired
     private final HttpSession httpSession;
@@ -68,13 +72,21 @@ public class MainController {
     }
 
     @GetMapping("category/detail")
-    public String pet(@RequestParam(value = "name") String name, Model model){
+    public String detail(@RequestParam(value = "name") String name, Model model, HttpSession session){
         List<product> li = productService.findName(name);
         model.addAttribute("li", li);
 
         Optional<comment> comment = commentService.findComment(name);
         model.addAttribute("comment", comment);
+
+        Optional<user> user = userService.findUsers((String) session.getAttribute("id"));
+        model.addAttribute("user", user);
         return "detail";
+    }
+
+    @PostMapping("category/detail/save")
+    public void save(comment comment){
+        commentService.save(comment);
     }
 
     @GetMapping("purchase")

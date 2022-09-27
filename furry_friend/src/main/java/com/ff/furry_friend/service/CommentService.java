@@ -24,4 +24,12 @@ public class CommentService {
     public void save(comment comment){
         commentRepository.save(comment);
     }
+
+    public void update(comment comment){
+        commentRepository.update(comment);
+    }
+
+    public void delete(comment comment){
+        commentRepository.delete(comment);
+    }
 }

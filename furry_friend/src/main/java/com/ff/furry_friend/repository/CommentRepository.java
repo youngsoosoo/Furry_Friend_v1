@@ -14,7 +14,7 @@ public interface CommentRepository {
     void save(comment comment);
 
     //댓글 수정
-    void updatecomment(comment comment);
+    void update(comment comment);
     //댓글 삭제
-    void deletecomment(int id, int pro_id);
+    void delete(comment comment);
 }
