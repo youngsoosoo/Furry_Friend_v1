@@ -3,12 +3,12 @@ package com.ff.furry_friend.repository;
 import com.ff.furry_friend.entity.comment;
 import org.springframework.stereotype.Repository;
 
-import java.util.Optional;
+import java.util.List;
 
 @Repository
 public interface CommentRepository {
     //댓글
-    Optional<comment> findComment(String name);
+    List<comment> findComment(String name);
 
     //댓글 저장
     void save(comment comment);

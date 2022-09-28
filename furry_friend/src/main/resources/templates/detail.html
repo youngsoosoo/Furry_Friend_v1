@@ -65,17 +65,20 @@ function shopping_basket(name){
 
 <div>
     <div>
-        <form action="category/detail/save" method="post">
-            <input type="text" id="content"/>
-            <input type="file" id="img"/>
-            <input type="hidden" id="user_id" th:value="${user}">
-            <input type="hidden" id="pro_id" th:value="${li}">
+        <form action="/category/detail/save" method="post">
+            <input type="text" id="content" name="content"/><br>
+            <input type="file" id="img" name="img"/>
+            <input type="hidden" id="user_id" name="user" th:value="${user.getCreate_id()}"/>
+            <input type="hidden" id="pro_id" name="product" th:value="${li.get(0).getPro_id()}"/></br>
+            <input type="submit" value="댓글 달기"/>
         </form>
+
 
 
         ======================================================
     </div>
-    <div th:each="item : ${comment}">
+
+    <div th:if="comment != null" th:each="item : ${comment}">
         <h4 th:text="${item.getImg()}"/>
         <h4 th:text="${item.getContent()}"/>
         <h4 th:text="${item.getUser().getName()}"/>

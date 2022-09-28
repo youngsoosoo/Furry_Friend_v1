@@ -2,6 +2,7 @@ package com.ff.furry_friend;
 
 import com.ff.furry_friend.repository.*;
 import com.ff.furry_friend.service.BasketService;
+import com.ff.furry_friend.service.CommentService;
 import com.ff.furry_friend.service.ProductService;
 import com.ff.furry_friend.service.UserService;
 import org.springframework.context.annotation.Bean;
@@ -46,6 +47,15 @@ public class SpringConfig{
     @Bean
     public UserRepository userRepository(){
         return new MemoryUserRepository(em);
+    }
+
+    public CommentService commentService(){
+        return new CommentService(commentRepository());
+    }
+
+    @Bean
+    public CommentRepository commentRepository(){
+        return new MemoryCommentRepository(em);
     }
 
 }

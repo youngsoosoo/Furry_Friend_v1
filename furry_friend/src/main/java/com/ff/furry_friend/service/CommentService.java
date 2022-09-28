@@ -5,7 +5,7 @@ import com.ff.furry_friend.repository.CommentRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.Optional;
+import java.util.List;
 
 @Service
 public class CommentService {
@@ -17,7 +17,7 @@ public class CommentService {
         this.commentRepository = commentRepository;
     }
 
-    public Optional<comment> findComment(String name){
+    public List<comment> findComment(String name){
         return commentRepository.findComment(name);
     }
 

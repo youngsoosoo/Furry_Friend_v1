@@ -9,13 +9,12 @@ import javax.persistence.*;
 
 @Entity     //여러 엔티티간 연관관계를 정의
 @Getter
-
+@Setter
 @NoArgsConstructor  //기본 생성자
 @AllArgsConstructor
 public class comment {
 
     @Id
-    @Setter
     @GeneratedValue
     private int commentid;
 

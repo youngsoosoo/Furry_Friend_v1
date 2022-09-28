@@ -1,12 +1,13 @@
 package com.ff.furry_friend.repository;
 
 import com.ff.furry_friend.entity.comment;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
 import java.util.List;
-import java.util.Optional;
 
+@Transactional
 public class MemoryCommentRepository implements CommentRepository{
     private final EntityManager em;
 
@@ -17,12 +18,12 @@ public class MemoryCommentRepository implements CommentRepository{
     }
 
     @Override
-    public Optional<comment> findComment(String name){
+    public List<comment> findComment(String name){
         List<comment> result = em.createQuery("select b from comment b where b.product.pro_name = :name", comment.class)
                 .setParameter("name", name)
                 .getResultList();
 
-        return result.stream().findAny();
+        return result;
     }
 
     @Override
