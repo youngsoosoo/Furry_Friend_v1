@@ -68,8 +68,7 @@ function shopping_basket(name){
         <form action="/category/detail/save" method="post">
             <input type="text" id="content" name="content"/><br>
             <input type="file" id="img" name="img"/>
-            <input type="hidden" id="user_id" name="user" th:value="${user.getCreate_id()}"/>
-            <input type="hidden" id="pro_id" name="product" th:value="${li.get(0).getPro_id()}"/></br>
+            <input type="hidden" id="pro_name" name="pro_name" th:value="${li.get(0).getPro_name()}"/></br>
             <input type="submit" value="댓글 달기"/>
         </form>
 

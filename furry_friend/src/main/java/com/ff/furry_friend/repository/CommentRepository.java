@@ -8,7 +8,7 @@ import java.util.List;
 @Repository
 public interface CommentRepository {
     //댓글
-    List<comment> findComment(String name);
+    List<comment> findComment(int pro_id);
 
     //댓글 저장
     void save(comment comment);

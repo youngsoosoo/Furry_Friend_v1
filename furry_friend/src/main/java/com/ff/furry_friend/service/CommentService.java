@@ -17,8 +17,8 @@ public class CommentService {
         this.commentRepository = commentRepository;
     }
 
-    public List<comment> findComment(String name){
-        return commentRepository.findComment(name);
+    public List<comment> findComment(int pro_id){
+        return commentRepository.findComment(pro_id);
     }
 
     public void save(comment comment){

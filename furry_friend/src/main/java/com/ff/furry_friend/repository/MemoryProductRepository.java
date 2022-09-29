@@ -42,4 +42,12 @@ public class MemoryProductRepository implements ProductRepository {
     public List<product> findAll() {
         return em.createQuery("select p from product p", product.class).getResultList();
     }
+
+    @Override
+    public List<product> findId(int pro_id){
+        List<product> result =  em.createQuery("select p from product p where p.pro_id = :pro_id", product.class)
+                .setParameter("pro_id", pro_id)
+                .getResultList();
+        return result;
+    }
 }

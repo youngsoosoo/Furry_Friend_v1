@@ -14,4 +14,6 @@ public interface ProductRepository {
     List<product> findPartName(String name);
 
     List<product> findAll();
+
+    List<product> findId(int pro_id);
 }

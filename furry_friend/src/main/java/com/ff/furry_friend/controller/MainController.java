@@ -72,24 +72,25 @@ public class MainController {
     }
 
     @GetMapping("category/detail")
-    public String detail(@RequestParam(value = "name") String name, Model model, HttpSession session){
-        List<product> li = productService.findName(name);
+    public String detail(@RequestParam(value = "id") int id, Model model){
+        List<product> li = productService.findId(id);
         model.addAttribute("li", li);
 
-        List<comment> comment = commentService.findComment(name);
+        List<comment> comment = commentService.findComment(id);
         model.addAttribute("comment", comment);
 
-        Optional<user> user = userService.findUsers((String) session.getAttribute("id"));
-        model.addAttribute("user", user.get());
         return "detail";
     }
 
     @PostMapping("/category/detail/save")
-    public String save(comment comment){
-        System.out.println(comment.getProduct() +  " " + comment.getUser());
+    public void save(comment comment, @RequestParam(value = "pro_id") int pro_id, HttpSession session){
+        List<product> li = productService.findId(pro_id);
+        Optional<user> result = userService.findUsers((String) session.getAttribute("id"));
+        comment.setProduct(li.get(0));
+        comment.setUser(result.get());
         commentService.save(comment);
 
-        return "redirect:/category/detail?name=" + comment.getProduct().getPro_name();
+        return "/category/detail?id=" + pro_id;
     }
 
     @GetMapping("purchase")
