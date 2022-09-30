@@ -18,7 +18,7 @@ public class MemoryCommentRepository implements CommentRepository{
     }
 
     @Override
-    public List<comment> findComment(int pro_id){
+    public List<comment> findComment(Long pro_id){
         List<comment> result = em.createQuery("select b from comment b where b.product.pro_id = :pro_id", comment.class)
                 .setParameter("pro_id", pro_id)
                 .getResultList();

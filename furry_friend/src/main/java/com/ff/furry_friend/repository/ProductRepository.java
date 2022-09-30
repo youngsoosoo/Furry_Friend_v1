@@ -15,5 +15,5 @@ public interface ProductRepository {
 
     List<product> findAll();
 
-    List<product> findId(int pro_id);
+    List<product> findId(Long pro_id);
 }

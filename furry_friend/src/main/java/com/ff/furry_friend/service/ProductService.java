@@ -35,7 +35,7 @@ public class ProductService {
         return productRepository.findAll();
     }
 
-    public List<product> findId(int pro_id){
+    public List<product> findId(Long pro_id){
         return productRepository.findId(pro_id);
     }
 }

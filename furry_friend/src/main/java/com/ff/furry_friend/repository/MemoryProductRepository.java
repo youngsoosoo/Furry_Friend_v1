@@ -44,7 +44,7 @@ public class MemoryProductRepository implements ProductRepository {
     }
 
     @Override
-    public List<product> findId(int pro_id){
+    public List<product> findId(Long pro_id){
         List<product> result =  em.createQuery("select p from product p where p.pro_id = :pro_id", product.class)
                 .setParameter("pro_id", pro_id)
                 .getResultList();

@@ -72,7 +72,7 @@ public class MainController {
     }
 
     @GetMapping("category/detail")
-    public String detail(@RequestParam(value = "id") int id, Model model){
+    public String detail(@RequestParam(value = "id", required=false) Long id, Model model){
         List<product> li = productService.findId(id);
         model.addAttribute("li", li);
 
@@ -83,14 +83,14 @@ public class MainController {
     }
 
     @PostMapping("/category/detail/save")
-    public void save(comment comment, @RequestParam(value = "pro_id") int pro_id, HttpSession session){
-        List<product> li = productService.findId(pro_id);
+    public String save(comment comment, @RequestParam(value = "pro_name", required=false) String pro_name, HttpSession session){
+        List<product> li = productService.findName(pro_name);
         Optional<user> result = userService.findUsers((String) session.getAttribute("id"));
         comment.setProduct(li.get(0));
         comment.setUser(result.get());
         commentService.save(comment);
 
-        return "/category/detail?id=" + pro_id;
+        return "redirect:/category/detail?id=" + li.get(0).getPro_id();
     }
 
     @GetMapping("purchase")
