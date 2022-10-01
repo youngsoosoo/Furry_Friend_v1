@@ -39,6 +39,26 @@ function shopping_basket(name){
     form.submit();
 }
 
+function comment_update(){
+
+}
+
+function comment_delete(id){
+    var form = document.createElement('form');
+    form.setAttribute('method', 'post');
+    form.setAttribute('action', '/category/detail/delete');
+    document.charset = "utf-8";
+
+    var hiddenField = document.createElement('input');
+    hiddenField.setAttribute('type', 'hidden');
+    hiddenField.setAttribute('commentid', 'commentid');
+    hiddenField.setAttribute('value', id);
+    form.appendChild(hiddenField);
+
+    document.body.appendChild(form);
+    form.submit();
+}
+
 </script>
 <body>
 <header th:replace="fragments/header.html::headerFragment"></header>
@@ -78,9 +98,15 @@ function shopping_basket(name){
     </div>
 
     <div th:if="comment != null" th:each="item : ${comment}">
-        <h4 th:text="${item.getImg()}"/>
-        <h4 th:text="${item.getContent()}"/>
-        <h4 th:text="${item.getUser().getName()}"/>
+        <div>
+            <h4 th:text="${item.getImg()}"/>
+            <h4 th:text="${item.getContent()}"/>
+            <h4 th:text="${item.getUser().getName()}"/>
+        </div>
+        <div th:if="${item.getUser().getId()} == ${userid}">
+            <button type="button" th:id="${item.getCommentid()}" th:onclick="comment_delete(this.getAttribute('id'))">삭제</button>
+        </div>
+
     </div>
 </div>
 

@@ -41,9 +41,9 @@ public class MemoryCommentRepository implements CommentRepository{
     }
 
     @Override
-    public void delete(comment comment) {
+    public void delete(int commentid) {
         Query query = em.createQuery("delete from comment b where b.commentid = :id")
-                .setParameter("id", comment.getCommentid());
+                .setParameter("id", commentid);
         query.executeUpdate();
     }
 }

@@ -16,5 +16,5 @@ public interface CommentRepository {
     //댓글 수정
     void update(comment comment);
     //댓글 삭제
-    void delete(comment comment);
+    void delete(int commentid);
 }

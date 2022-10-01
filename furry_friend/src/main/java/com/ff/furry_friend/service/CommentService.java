@@ -29,7 +29,7 @@ public class CommentService {
         commentRepository.update(comment);
     }
 
-    public void delete(comment comment){
-        commentRepository.delete(comment);
+    public void delete(int commentid){
+        commentRepository.delete(commentid);
     }
 }

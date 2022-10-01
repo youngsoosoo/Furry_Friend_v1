@@ -72,12 +72,14 @@ public class MainController {
     }
 
     @GetMapping("category/detail")
-    public String detail(@RequestParam(value = "id", required=false) Long id, Model model){
+    public String detail(@RequestParam(value = "id", required=false) Long id, Model model, HttpSession session){
         List<product> li = productService.findId(id);
         model.addAttribute("li", li);
 
         List<comment> comment = commentService.findComment(id);
         model.addAttribute("comment", comment);
+
+        model.addAttribute("userid", (String)session.getAttribute("id"));
 
         return "detail";
     }
@@ -97,5 +99,11 @@ public class MainController {
     public String Purchase(@RequestParam(value = "name") String name){  //구매
         System.out.println(name);
         return null;
+    }
+
+    @PostMapping("/category/detail/delete")
+    public String comment_delete(@RequestParam(value = "commentid", required=false) int commentid) {
+        commentService.delete(commentid);
+        return "";  //삭제시 원래 페이지 redirect필요
     }
 }
