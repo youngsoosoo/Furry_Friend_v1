@@ -103,7 +103,15 @@ public class MainController {
 
     @PostMapping("/category/detail/delete")
     public String comment_delete(@RequestParam(value = "commentid", required=false) int commentid) {
+        System.out.println(commentid);
         commentService.delete(commentid);
-        return "";  //삭제시 원래 페이지 redirect필요
+        List<comment> li = commentService.findCommentId(commentid);
+
+        return "redirect:/category/detail?id=" + li.get(0).getProduct().getPro_id();  //삭제시 원래 페이지 redirect필요
+    }
+
+    @PostMapping("/category/detail/update")
+    public String comment_update(){
+        return "";
     }
 }

@@ -10,6 +10,8 @@ public interface CommentRepository {
     //댓글
     List<comment> findComment(Long pro_id);
 
+    List<comment> findCommentId(int commentid);
+
     //댓글 저장
     void save(comment comment);
 

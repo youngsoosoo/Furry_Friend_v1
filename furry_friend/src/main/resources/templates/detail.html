@@ -43,7 +43,7 @@ function comment_update(){
 
 }
 
-function comment_delete(id){
+function comment_delete(commentid){
     var form = document.createElement('form');
     form.setAttribute('method', 'post');
     form.setAttribute('action', '/category/detail/delete');
@@ -52,7 +52,7 @@ function comment_delete(id){
     var hiddenField = document.createElement('input');
     hiddenField.setAttribute('type', 'hidden');
     hiddenField.setAttribute('commentid', 'commentid');
-    hiddenField.setAttribute('value', id);
+    hiddenField.setAttribute('value', commentid);
     form.appendChild(hiddenField);
 
     document.body.appendChild(form);

@@ -27,6 +27,15 @@ public class MemoryCommentRepository implements CommentRepository{
     }
 
     @Override
+    public List<comment> findCommentId(int commentid){
+        List<comment> result = em.createQuery("select b from comment b where b.commentid = :commentid", comment.class)
+                .setParameter("commentid", commentid)
+                .getResultList();
+
+        return result;
+    }
+
+    @Override
     public void save(comment comment) {
         comment.setCommentid(sequence++);
         em.persist(comment);

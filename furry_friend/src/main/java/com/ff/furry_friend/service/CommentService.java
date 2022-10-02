@@ -21,6 +21,10 @@ public class CommentService {
         return commentRepository.findComment(pro_id);
     }
 
+    public List<comment> findCommentId(int commentid){
+        return commentRepository.findCommentId(commentid);
+    }
+
     public void save(comment comment){
         commentRepository.save(comment);
     }
