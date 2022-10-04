@@ -104,9 +104,16 @@ function comment_delete(commentid){
             <h4 th:text="${item.getUser().getName()}"/>
         </div>
         <div th:if="${item.getUser().getId()} == ${userid}">
-            <button type="button" th:id="${item.getCommentid()}" th:onclick="comment_delete(this.getAttribute('id'))">삭제</button>
+            <form action="/category/detail/delete" method="post">
+                <input type="hidden" id="commentid" name="commentid" th:value="${item.getCommentid()}">
+                <input type="submit" value="삭제">
+            </form>
+            <form action="/category/detail/update" method="post">
+<!--                <input type="hidden" id="commentid" name="commentid" th:value="${item.getCommentid()}">-->
+                <input type="submit" value="수정">
+            </form>
+<!--            <button type="button" th:id="''+${item.getCommentid()}" th:onclick="comment_delete(this.getAttribute('id'))">삭제</button>-->
         </div>
-
     </div>
 </div>
 

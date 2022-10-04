@@ -4,39 +4,56 @@ css 부트스트랩
 최대한 코드 깔끔하게 보안성이나 
 
 관리자 로그인 root 1234 관리자 로그인()
-용수 - 카테고리 - 강아지 별, 고양이 별 - 사료, 옷, 집(캣타워), 장난감, 간식, 배변패드(모래), 애견용품
-민호 - 메인페이지(로그인/회원가입), 검색(검색에 따른 페이지), 페이지(장바구니, 찜)
-별이 - 커뮤니티(지도기능, 글쓰기, id 전체 노출 x, 수정 삭제 본인만, 검색 ,페이징)
+용수 - 카테고리 - 강아지 별(1), 고양이 별(2) - 사료(1), 옷(2), 집(캣타워)(3), 장난감(4), 간식(5), 배변패드(모래)(6), 애견용품(7)
 
 
-					첫 화면   - 메인페이지 - 로그인/회원가입(아이디 중복, 비밀번호 확인, 핸드폰 인증)
+					첫 화면   - 메인페이지(Best 상품) - 로그인/회원가입(아이디 중복, 비밀번호 확인, 핸드폰 인증)
 						- 검색(검색에 따른 페이지)
 						- 카테고리 - 강아지 별, 고양이 별 - 사료, 옷, 집(캣타워), 장난감, 간식, 배변패드(모래), 애견용품
-		  				- 반려동물 호텔
-		  				- 커뮤니티(지도기능, 글쓰기, id 전체 노출 x, 수정 삭제 본인만, 검색 ,페이징)
-		  				- 집 주변 동물병원, 유기견 보호소(지도에서 고를 수 있게)
 						- 페이지(장바구니, 찜) - 결제(카카오, 네이버, 신용카드, 간편결제, 적립금, 쿠폰)
+						- 상품리뷰(댓글달기)
+						- AWS
+						- ------------------------------------------------------------------------
+						- 집 주변 동물병원, 유기견 보호소(지도에서 고를 수 있게)
+						- 커뮤니티(지도기능, 글쓰기, id 전체 노출 x, 수정 삭제 본인만, 검색 ,페이징)
+		  				- 반려동물 호텔
 
 
+로그인
+홈페이지 로그인
+카카오로그인
+네이버로그인
+구글로그인
 
-
-
-
+카카오페이 API 테스트용 코드 : 테스트
+네이버페이 API 
 
 
 
 DB설계
-id - pk || pro_number, coupon_name - fk
-1. user - id, pw, address, name, phone, save_money(적립금), coupon_name, create_time
+1. user - create_id(pk), address, id, name, phone, pw, save_money(적립금), coupon_name, create_time, role(역할)
+2. basket - basket_id(pk), amount, pro_id(fk), user_id(fk)
+3. product - pro_id(pk), categoty, pro_explain, pro_image, pro_name, pro_number, pro_option, pro_price, pro_view
+4. comment- commentid(pk), content, img, pro_id(fk), user_id(fk)
+
+
+
+
 2. community- id, title, content, location(지도에서 받아온 좌표), regdate(등록 시간)
 3. map - location, category(동물병원, 보호소, 호텔)
-4. basket - id, pro_name, pro_amount
-5. product - categoty, pro_number, pro_name, pro_image, pro_explain, pro_price, pro_option, pro_view
 6. coupon - id, coupon_if, coupon_name, coupon_amount, use_date
 
 협업 : git
 
-마지막은 AWS
+마지막은 AWS, 서버리스, 중고품 경매
 
 참고
 https://miinsun.tistory.com/64?category=903502
+카카오 로그인
+https://antdev.tistory.com/37?category=807235
+https://loosie.tistory.com/300?category=932704
+카카오 테스트 및 DB
+https://ws-pace.tistory.com/100
+
+구글 네이버 카카오 스프링시큐리티 적용
+https://lotuus.tistory.com/78?category=981314

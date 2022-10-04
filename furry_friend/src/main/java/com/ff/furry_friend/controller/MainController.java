@@ -4,7 +4,6 @@ import com.ff.furry_friend.entity.comment;
 import com.ff.furry_friend.entity.product;
 import com.ff.furry_friend.entity.user;
 import com.ff.furry_friend.oauth2.SessionUser;
-import com.ff.furry_friend.service.BasketService;
 import com.ff.furry_friend.service.CommentService;
 import com.ff.furry_friend.service.ProductService;
 import com.ff.furry_friend.service.UserService;
@@ -106,12 +105,15 @@ public class MainController {
         System.out.println(commentid);
         commentService.delete(commentid);
         List<comment> li = commentService.findCommentId(commentid);
+        System.out.println(li.get(0));
 
         return "redirect:/category/detail?id=" + li.get(0).getProduct().getPro_id();  //삭제시 원래 페이지 redirect필요
     }
 
     @PostMapping("/category/detail/update")
     public String comment_update(){
+
+
         return "";
     }
 }
