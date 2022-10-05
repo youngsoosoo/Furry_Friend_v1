@@ -8,6 +8,7 @@ import com.ff.furry_friend.service.UserService;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpSession;
@@ -79,4 +80,17 @@ public class UserController {
     }
 
 
+    //아이디 찾기
+    @PostMapping("/user/findid")
+    public String findid(@RequestParam("phone") String phone, @RequestParam("name") String name, Model model){
+        model.addAttribute("id", userService.findPhone(phone, name));
+        return "/user/login";
+    }
+
+    //비밀번호 찾기
+    @GetMapping("/user/findpw")
+    public String findpw(@RequestParam("id") String id, Model model){
+        model.addAttribute("id", userService.findPw(id));
+        return "/user/login";
+    }
 }

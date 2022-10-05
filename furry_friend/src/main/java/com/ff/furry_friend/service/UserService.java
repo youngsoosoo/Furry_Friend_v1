@@ -89,4 +89,12 @@ public class UserService {
     public int Create_id(int id){
         return userRepository.Create_id(id);
     }
+
+    public String findPhone(String phone, String name) {
+        return userRepository.findPhone(phone, name);
+    }
+
+    public String findPw(String id){
+        return userRepository.findPw(id);
+    }
 }

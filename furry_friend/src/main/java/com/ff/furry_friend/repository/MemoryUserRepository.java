@@ -89,4 +89,19 @@ public class MemoryUserRepository implements UserRepository {
         user.setId(li.get(0).getId());
         return user;
     }
+
+    @Override
+    public String findPhone(String phone, String name){
+        String id = String.valueOf( em.createQuery("select m.id from user m where m.phone = :phone and m.name =:name")
+                .setParameter("phone", phone)
+                .setParameter("name", name));
+        return id;
+    }
+
+    @Override
+    public String findPw(String id){
+        String pw = String.valueOf( em.createQuery("select m.pw from user m where m.id = :id")
+                .setParameter("id", id));
+        return pw;
+    }
 }

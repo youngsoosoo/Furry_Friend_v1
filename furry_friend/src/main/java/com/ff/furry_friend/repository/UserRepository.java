@@ -24,4 +24,8 @@ public interface UserRepository {
     int Create_id(int id);
 
     user findByUserid(String id);
+
+    String findPhone(String phone, String name);
+
+    String findPw(String id);
 }
