@@ -81,6 +81,10 @@ public class UserController {
 
 
     //아이디 찾기
+    @GetMapping("/user/findid")
+    public String findidGet(){
+        return "/user/findid";
+    }
     @PostMapping("/user/findid")
     public String findid(@RequestParam("phone") String phone, @RequestParam("name") String name, Model model){
         model.addAttribute("id", userService.findPhone(phone, name));
@@ -89,8 +93,12 @@ public class UserController {
 
     //비밀번호 찾기
     @GetMapping("/user/findpw")
+    public String findpwGet(){
+        return "/user/findpw";
+    }
+    @PostMapping("/user/findpw")
     public String findpw(@RequestParam("id") String id, Model model){
-        model.addAttribute("id", userService.findPw(id));
+        model.addAttribute("pw", userService.findPw(id));
         return "/user/login";
     }
 }

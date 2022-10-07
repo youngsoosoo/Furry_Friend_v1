@@ -1,6 +1,21 @@
 <!DOCTYPE HTML>
 <html xmlns:th="http://www.thymeleaf.org">
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<script>
+    function btn_findid(){
+        var w = (window.screen.width/2)- 200;
+        var h = (window.screen.height/2)- 200;
+        var url = "/user/findid";
+        window.open(url, "findid", "width=500, height=500, left="+w+", top="+h);
+    }
+
+    function btn_findid(){
+        var w = (window.screen.width/2)- 200;
+        var h = (window.screen.height/2)- 200;
+        var url = "/user/findpw";
+        window.open(url, "findpw", "width=500, height=500, left="+w+", top="+h);
+    }
+</script>
 <body>
 <div class="container">
     <span th:if="${id==null}">
@@ -14,6 +29,8 @@
                 <input type="text" id="pw" name="pw" placeholder="패스워드를 입력하세요">
             </div>
             <button type="submit">로그인</button>
+            <button type="button" class="btn_findid" onclick="btn_findid()">아이디 찾기</button>
+            <button type="button" class="btn_findpw" onclick="btn_findpw()">비밀번호 찾기</button>
         </form>
 
         <a href="/oauth2/authorization/kakao" class="btn btn-third active" role="button">
