@@ -87,8 +87,11 @@ public class UserController {
     }
     @PostMapping("/user/findid")
     public String findid(@RequestParam("phone") String phone, @RequestParam("name") String name, Model model){
+
         model.addAttribute("id", userService.findPhone(phone, name));
-        return "/user/login";
+        System.out.println(userService.findPhone(phone, name));
+
+        return "redirect:/user/findid";
     }
 
     //비밀번호 찾기
@@ -99,6 +102,7 @@ public class UserController {
     @PostMapping("/user/findpw")
     public String findpw(@RequestParam("id") String id, Model model){
         model.addAttribute("pw", userService.findPw(id));
-        return "/user/login";
+        System.out.println(userService.findPw(id));
+        return "redirect:/user/findpw";
     }
 }

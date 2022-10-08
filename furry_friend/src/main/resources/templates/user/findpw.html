@@ -5,9 +5,14 @@
     <title>Title</title>
 </head>
 <body>
-    <form action="/user/findid" method="post">
-        <input type="text" id="id" name="id" value="아이디"><br>
+    <form action="/user/findpw" method="post">
+        <input type="text" id="id" name="id" placeholder="아이디"><br>
         <input type="submit" value="비밀번호 찾기">
     </form>
+
+    <div th:if="${pw} != null">
+        아이디는 [[${pw}]]입니다.
+        <button type="button" onclick="location.href='/user/login'">로그인 하기</button>
+    </div>
 </body>
 </html>
