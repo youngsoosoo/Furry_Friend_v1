@@ -8,11 +8,12 @@
 
 </script>
 <body>
-    <form action="/user/findid" method="post">
-        <input type="text" id="phone" name="phone" placeholder="핸드폰 번호"><br>
-        <input type="text" id="name" name="name" placeholder="이름"><br>
-        <input type="submit" value="아이디 찾기">
-    </form>
+<div>
+    <input type="text" id="phone" name="phone" placeholder="핸드폰 번호"><br>
+    <input type="text" id="name" name="name" placeholder="이름"><br>
+    <span id="idcheck">아이디 찾기</span>
+</div>
+
 
     <div th:if="${id} != null">
         아이디는 [[${id}]]입니다.
