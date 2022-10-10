@@ -1,4 +1,4 @@
-$('#idcheck').click(function (){
+$("button[name='idcheck']").click(function (){
     var phone = $('#phone').val();
     var name = $('#name').val();
 
@@ -17,7 +17,7 @@ $('#idcheck').click(function (){
    })
 });
 
-$('#pwcheck').click(function (){
+$("button[name='pwcheck']").click(function (){
     var id = $('#id').val();
 
     $.ajax({

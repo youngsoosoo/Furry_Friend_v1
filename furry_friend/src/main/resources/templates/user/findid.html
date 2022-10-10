@@ -11,13 +11,7 @@
 <div>
     <input type="text" id="phone" name="phone" placeholder="핸드폰 번호"><br>
     <input type="text" id="name" name="name" placeholder="이름"><br>
-    <span id="idcheck">아이디 찾기</span>
+    <button name="idcheck">아이디 찾기</button>
 </div>
-
-
-    <div th:if="${id} != null">
-        아이디는 [[${id}]]입니다.
-        <button type="button" onclick="location.href='/user/login'">로그인 하기</button>
-    </div>
 </body>
 </html>
