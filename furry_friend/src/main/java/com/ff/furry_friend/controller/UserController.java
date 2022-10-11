@@ -88,6 +88,7 @@ public class UserController {
     @PostMapping("/user/findid")
     @ResponseBody
     public String findid(@RequestParam("phone") String phone, @RequestParam("name") String name, Model model){
+        System.out.println("아이디 찾기 : " + userService.findPhone(phone, name));
         return userService.findPhone(phone, name);
     }
 
@@ -100,6 +101,7 @@ public class UserController {
     @PostMapping("/user/findpw")
     @ResponseBody
     public String findpw(@RequestParam("id") String id, Model model){
+        System.out.println("비밀번호 찾기 : " + userService.findPw(id));
         return userService.findPw(id);
     }
 }
