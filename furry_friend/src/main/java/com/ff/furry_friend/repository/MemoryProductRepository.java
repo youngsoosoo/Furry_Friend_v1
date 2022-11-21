@@ -32,7 +32,7 @@ public class MemoryProductRepository implements ProductRepository {
 
     @Override
     public List<product> findPartName(String name){
-        List<product> result =  em.createQuery("select p from product p where p.pro_name LIKE concat('%', :pro_name, '%')", product.class)
+        List<product> result =  em.createQuery("select p from product p where p.pro_name LIKE TRIM(concat('%', :pro_name, '%'))", product.class)
                 .setParameter("pro_name", name)
                 .getResultList();
         return result;
